@@ -271,21 +271,7 @@ $(() => {
 
 
 
-    var getfunction = function() {
-      dataGrid.
-      $.ajax({
-        url: `${url}/common/group/list`,
-        dataType: 'json',
-        type: 'GET',
-        data: json,
-        contentType: "application/json; charset=UTF-8",
-        success: function(json) {
-            if (json) {
-              console.log('endend');
-            }
-        }
-      }); 
-    }
+
 
 
   // popup 기능
@@ -363,7 +349,7 @@ $(() => {
             }); 
 
             // get 불러오기
-           getData();
+            getData();
 
             popup.hide();
 

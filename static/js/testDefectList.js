@@ -335,58 +335,58 @@ $(() => {
         </script>
 
         <form id="popupForm" name="popupForm">
-        <label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
-        <label> Defect Id: </label> <input type="text" id="popupDefectId" name ="popupDefectId" value="${clickeddata.defectId}"> <br>
-        <label> Test Type: </label> <input type="text" id="popupTestType" name="popupTestType"value="${clickeddata.testType}"> <br>
-        <label> Scenario Type: </label> <input type="text" id="popupScenarioType" name="popupScenarioType" value="${clickeddata.scenarioType}"> <br>
-        <label> Scenario Category: </label> <input type="text" id="popupScenarioCategory" name="popupScenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
-        <label> Version: </label> <input type="text" id="popupVersion" name="popupVersion" value="${clickeddata.version}"> <br>
-        <label> Test Scenario Id: </label> <input type="text" id="popupTestScenarioId" name="popupTestScenarioId" value="${clickeddata.testScenarioId}"> <br>
-        <label> Test Scenario Name: </label> <input type="text" id="popupTestScenarioName" name="popupTestScenarioName" value="${clickeddata.testScenarioName}"> <br>
-        <label> Test Case Id: </label> <input type="text" id="popupTestCaseId" name="popupTestCaseId" value="${clickeddata.testCaseId}"> <br>
-        <label> Test Case Name: </label> <input type="text" id="popupTestCaseName" name="popupTestCaseName" value="${clickeddata.testCaseName}"> <br>
+        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
+        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}"> <br>
+        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}"> <br>
+        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}"> <br>
+        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
+        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}"> <br>
+        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}"> <br>
+        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}"> <br>
+        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}"> <br>
+        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}"> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}"> <br>
         <label> Execution Status: </label> 
-          <select name="popupExecutionStatus1" id="popupExecutionStatus1" value="">
+          <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
           </select> <br>
-        <label> Execution Result: </label> <input type="text" id="popupExecutionResult" name="popupExecutionResult" value="${clickeddata.execResult}">
+        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}">
         <br>
         
-        <label> Defect Category: </label> <input type="text" id="popupDefectCategory" name="popupDefectCategory" value="${clickeddata.defectCategory}"> <br>
-        <label> Defect Contents: </label> <input type="text" id="popupDefectContents" name="popupDefectContents" value="${clickeddata.defectContents}"> <br>
-        <label> Created By: </label> <input type="text" id="popupCreatedBy" name="popupCreatedBy" value="${clickeddata.createdBy}"> <br>
-        <label> Create At: </label> <input type="text" id="popupCreateAt" name="popupCreateAt" value="${clickeddata.createAt}"> <br>
+        <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
+        <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value="${clickeddata.defectContents}"> <br>
+        <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value="${clickeddata.createdBy}"> <br>
+        <label> Create At: </label> <input type="text" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
         
-        <label> Defect Team: </label> <input type="text" id="popupDefectTeam" name="popupDefectTeam" value="${clickeddata.defectTeam}"> <br>
-        <label> Defect Charger: </label> <input type="text" id="popupDefectCharger" name="popupDefectCharger" value="${clickeddata.defectCharger}"> <br>
+        <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
+        <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="popupDefectStartDueDate" name="popupDefectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="popupDefectEndDueDate" name="popupDefectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
         
-        <label> Defect Status: </label> <input type="text" id="popupDefectStatus" name="popupDefectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
+        <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
-        <label> Defect Date: </label> <input type="text" id="popupDefectDate" name="popupDefectDate" value="${clickeddata.defectDate}"> <br>
+        <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
         <br>
         <label> Defect Action Yn: </label> 
-          <select id="popupDefectActionYn" name="popupDefectActionYn" value="">
+          <select id="defectActionYn" name="defectActionYn" value="">
             <option value="" selected disabled>${clickeddata.defectActionYn}</option> <br>
             <option value="n">n </option>
             <option value="y">y </option>
           </select><br>
-        <label> Defect Action Contents: </label> <input type="text" id="popupDefectActionContents" name="popupDefectActionContents" value="${clickeddata.defectActionContents}"> <br>
+        <label> Defect Action Contents: </label> <input type="text" id="defectActionContents" name="defectActionContents" value="${clickeddata.defectActionContents}"> <br>
         
         <div id="defectCheckInfo" style="display:none">
           <label> Defect Check: </label> 
-            <select id="popupDefectCheck" name="popupDefectCheck" value="">
+            <select id="defectCheck" name="defectCheck" value="">
                 <option value="" selected disabled>${clickeddata.defectCheck}</option> <br>
                 <option value="n">n </option>
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="text" id="popupDefectCheckDate" name="popupDefectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
         </div>
         </form>`),
       );
@@ -408,20 +408,20 @@ $(() => {
     scrollView.append(
       $(`
       <form id="popupForm" name="popupForm">
-        <label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="" readonly/> <br>
+        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="" readonly/> <br>
       
-        <label> Defect Category: </label> <input type="text" id="popupDefectCategory" name="popupDefectCategory" value=""> <br>
-        <label> Defect Contents: </label> <input type="text" id="popupDefectContents" name="popupDefectContents" value=""> <br>
-        <label> Created By: </label> <input type="text" id="popupCreatedBy" name="popupCreatedBy" value=""> <br>
-        <label> Create At: </label> <input type="text" id="popupCreateAt" name="popupCreateAt" value=""> <br>
+        <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value=""> <br>
+        <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value=""> <br>
+        <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value=""> <br>
+        <label> Create At: </label> <input type="text" id="createAt" name="createAt" value=""> <br>
         
-        <label> Defect Team: </label> <input type="text" id="popupDefectTeam" name="popupDefectTeam" value=""> <br>
-        <label> Defect Charger: </label> <input type="text" id="popupDefectCharger" name="popupDefectCharger" value=""> <br>
+        <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value=""> <br>
+        <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value=""> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="popupDefectStartDueDate" name="popupDefectStartDueDate" value=""> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="popupDefectEndDueDate" name="popupDefectEndDueDate" value=""> <br>
+        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value=""> <br>
+        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value=""> <br>
         
-        <label> Defect Status: </label> <input type="text" id="popupDefectStatus" name="popupDefectStatus" value="New" readonly/> <br>
+        <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="New" readonly/> <br>
         </form>`),
       );
 
@@ -440,58 +440,58 @@ $(() => {
     scrollView.append(
         $(`
         <form id="popupForm" name="popupForm">
-        <label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
-        <label> Defect Id: </label> <input type="text" id="popupDefectId" name ="popupDefectId" value="${clickeddata.defectId}"> <br>
-        <label> Test Type: </label> <input type="text" id="popupTestType" name="popupTestType"value="${clickeddata.testType}"> <br>
-        <label> Scenario Type: </label> <input type="text" id="popupScenarioType" name="popupScenarioType" value="${clickeddata.scenarioType}"> <br>
-        <label> Scenario Category: </label> <input type="text" id="popupScenarioCategory" name="popupScenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
-        <label> Version: </label> <input type="text" id="popupVersion" name="popupVersion" value="${clickeddata.version}"> <br>
-        <label> Test Scenario Id: </label> <input type="text" id="popupTestScenarioId" name="popupTestScenarioId" value="${clickeddata.testScenarioId}"> <br>
-        <label> Test Scenario Name: </label> <input type="text" id="popupTestScenarioName" name="popupTestScenarioName" value="${clickeddata.testScenarioName}"> <br>
-        <label> Test Case Id: </label> <input type="text" id="popupTestCaseId" name="popupTestCaseId" value="${clickeddata.testCaseId}"> <br>
-        <label> Test Case Name: </label> <input type="text" id="popupTestCaseName" name="popupTestCaseName" value="${clickeddata.testCaseName}"> <br>
+        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
+        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}"> <br>
+        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}"> <br>
+        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}"> <br>
+        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
+        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}"> <br>
+        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}"> <br>
+        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}"> <br>
+        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}"> <br>
+        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}"> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}"> <br>
         <label> Execution Status: </label> 
-          <select name="popupExecutionStatus1" id="popupExecutionStatus1" value="">
+          <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
           </select> <br>
-        <label> Execution Result: </label> <input type="text" id="popupExecutionResult" name="popupExecutionResult" value="${clickeddata.execResult}">
+        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}">
         <br>
         
-        <label> Defect Category: </label> <input type="text" id="popupDefectCategory" name="popupDefectCategory" value="${clickeddata.defectCategory}"> <br>
-        <label> Defect Contents: </label> <input type="text" id="popupDefectContents" name="popupDefectContents" value="${clickeddata.defectContents}"> <br>
-        <label> Created By: </label> <input type="text" id="popupCreatedBy" name="popupCreatedBy" value="${clickeddata.createdBy}"> <br>
-        <label> Create At: </label> <input type="text" id="popupCreateAt" name="popupCreateAt" value="${clickeddata.createAt}"> <br>
+        <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
+        <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value="${clickeddata.defectContents}"> <br>
+        <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value="${clickeddata.createdBy}"> <br>
+        <label> Create At: </label> <input type="text" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
         
-        <label> Defect Team: </label> <input type="text" id="popupDefectTeam" name="popupDefectTeam" value="${clickeddata.defectTeam}"> <br>
-        <label> Defect Charger: </label> <input type="text" id="popupDefectCharger" name="popupDefectCharger" value="${clickeddata.defectCharger}"> <br>
+        <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
+        <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="popupDefectStartDueDate" name="popupDefectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="popupDefectEndDueDate" name="popupDefectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
         
-        <label> Defect Status: </label> <input type="text" id="popupDefectStatus" name="popupDefectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
+        <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
-        <label> Defect Date: </label> <input type="text" id="popupDefectDate" name="popupDefectDate" value="${clickeddata.defectDate}"> <br>
+        <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
         <br>
         <label> Defect Action Yn: </label> 
-          <select id="popupDefectActionYn" name="popupDefectActionYn" value="">
+          <select id="defectActionYn" name="defectActionYn" value="">
             <option value="" selected disabled>${clickeddata.defectActionYn}</option> <br>
             <option value="n">n </option>
             <option value="y">y </option>
           </select><br>
-        <label> Defect Action Contents: </label> <input type="text" id="popupDefectActionContents" name="popupDefectActionContents" value="${clickeddata.defectActionContents}"> <br>
+        <label> Defect Action Contents: </label> <input type="text" id="defectActionContents" name="defectActionContents" value="${clickeddata.defectActionContents}"> <br>
         
         <div id="defectCheckInfo">
           <label> Defect Check: </label> 
-            <select id="popupDefectCheck" name="popupDefectCheck" value="">
+            <select id="defectCheck" name="defectCheck" value="">
                 <option value="" selected disabled>${clickeddata.defectCheck}</option> <br>
                 <option value="n">n </option>
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="text" id="popupDefectCheckDate" name="popupDefectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
         </div>
         </form>`),
       );
@@ -552,7 +552,25 @@ $(() => {
 
 
           // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
-          var data = $("#popupForm").serialize();
+          // var data = $("#popupForm").serialize();
+          var data = { 
+            'executionId' : $("#executionId").val(),
+            'defectId' : $("#defectId").val(),
+            'defectCategory' : $("#defectCategory").val(),
+            'defectContents' : $("#defectContents").val(),
+            'createdBy' : $("createdBy").val(),
+            'createAt' : $("createAt").val(),
+            'defectTeam' : $("#defectTeam").val(),
+            'defectCharger': $("#defectCharger").val(),
+            'defectStartDueDate': $("#defectStartDueDate").val(),
+            'defectEndDueDate': $("#defectEndDueDate").val(),
+            'defectStatus': $("#defectStatus").val(),
+            'defectDate': $("#defectDate").val(),
+            'defectActionYn': $("#defectActionYn").val(),
+            'defectActionContents': $("#defectActionContents").val(),
+            'defectCheck': $("#defectCheck").val(),
+            'defectCheckDate': $("#defectCheckDate").val(),
+          };
 
 
           // 오브젝트 json 타입으로 변경
@@ -627,7 +645,25 @@ $(() => {
         onClick() {
           console.log("create click");
 
-          var data = $("#popupForm").serialize();
+          // var data = $("#popupForm").serialize();
+          var data = { 
+            'executionId' : $("#executionId").val(),
+            'defectId' : $("#defectId").val(),
+            'defectCategory' : $("#defectCategory").val(),
+            'defectContents' : $("#defectContents").val(),
+            'createdBy' : $("createdBy").val(),
+            'createAt' : $("createAt").val(),
+            'defectTeam' : $("#defectTeam").val(),
+            'defectCharger': $("#defectCharger").val(),
+            'defectStartDueDate': $("#defectStartDueDate").val(),
+            'defectEndDueDate': $("#defectEndDueDate").val(),
+            'defectStatus': $("#defectStatus").val(),
+            'defectDate': $("#defectDate").val(),
+            'defectActionYn': $("#defectActionYn").val(),
+            'defectActionContents': $("#defectActionContents").val(),
+            'defectCheck': $("#defectCheck").val(),
+            'defectCheckDate': $("#defectCheckDate").val(),
+          };
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);

@@ -590,7 +590,7 @@ $(() => {
                   }
                 });
                 console.log("execution/defect 실행");
-                getData();
+                
               } else{
                 //Ajax POST Method TEST -> result 성공 입력
               $.ajax({
@@ -606,7 +606,7 @@ $(() => {
                   }
                 });
                 console.log("execution/result 실행");
-                getData();
+                
               };
                     
             // popup 창 위의 정보들을 json 형태로 POST method 연결하기
@@ -619,6 +619,7 @@ $(() => {
               },
             }, 'success', 3000);
 
+            getData();
             popup.hide();
           },
         },
@@ -818,10 +819,7 @@ $(() => {
                     console.log('endend');
                   }
               }
-            });
-
-            getData();
-                  
+            });                  
           // popup 창 위의 정보들을 json 형태로 POST method 연결하기
           let message = "정보를 수정했습니다!"
           DevExpress.ui.notify({
@@ -834,7 +832,7 @@ $(() => {
 
           getData();
 
-          popup.hide();
+          popup3.hide();
         },
       },
     }, {
@@ -844,7 +842,7 @@ $(() => {
       options: {
         text: 'Close',
         onClick() {
-          popup.hide();
+          popup3.hide();
         },
       },
     }],
