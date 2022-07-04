@@ -1,0 +1,132 @@
+#data-grid-demo {
+  min-height: 500px;
+}
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 13%;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding-top: 8px;
+}
+
+/* Sidebar links */
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  color: #2196F3;
+  display: block;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: white;
+  color: #064579;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.gridContainer {
+  margin-left: 250px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 13%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.gridContainer {margin-left: 0;
+  width: 87%;
+  float: right;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+
+/* multi */
+
+#grid {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.selected-data {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+}
+
+.selected-data .caption {
+  font-weight: bold;
+  font-size: 115%;
+  margin-right: 4px;
+}
+
+/* filter pannel */
+#gridContainer {
+  height: 440px;
+}
+
+.options {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+}
+
+.caption {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.option {
+  margin-top: 10px;
+}
+
+.option > span {
+  margin-right: 10px;
+}
+
+.option > .dx-selectbox {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+/* button */
+#form {
+  max-width: 600px;
+  margin: auto;
+}
+
+#button {
+  margin-top: 50px;
+  margin-right: 20px;
+  float: right;
+}

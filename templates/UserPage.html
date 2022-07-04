@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>User Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.light.css" />
+    <script src="https://cdn3.devexpress.com/jslib/21.2.7/js/dx.all.js"></script>
+    <script src="https://unpkg.com/devextreme-aspnet-data@2.8.6/js/dx.aspnet.data.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css"> </linkrel>
+    <script src="../static/js/userPage.js"></script>
+  </head>
+  <body class="dx-viewport">
+
+    
+    <div class="sidebar">
+        <a href="#" onclick="location.href='TestExecutionList.html'">시나리오 테스트 목록</a>
+        <a href="#" onclick="location.href='TestDefectList.html'">결함 목록</a>
+        <a href="#">대쉬보드</a>
+        <a href="#">시나리오 테스트 보고서</a>
+        <a class="active" href="#" onclick="location.href='UserPage.html'">사용자</a>
+        <a href="#" onclick="location.href='CommonCode.html'" >공통코드</a>
+
+    </div>
+
+    <div class="demo-container" style="margin-left:13%;margin-top:3%;padding:1px 16px;height:1000px;">
+  
+      <div>
+        <div>
+
+          <div id="buttonContainer"></div>
+          <div id="createInfo"></div>
+          <div id="userEditPopup"></div>
+          <div id="deleteButton"></button>
+        </div>
+        <div id="gridContainer"></div>
+        <div id="popup"></div>
+        <div id="popup2"></div>
+        <div id="userInfo" >
+          <p class="userId"></p>
+          <p class="userPassword"></p>
+          <p class="userName"></p>
+          <p class="userEmail"></p>
+          <p class="roleType"></p>
+        </div>
+        
+
+
+
+      
+      <!-- <div class="options">
+
+        <div class="caption">Options</div>
+        
+        <div class="option">
+          <span>Apply Filter</span>
+          <div id="useFilterApplyButton"></div>
+        </div>
+
+        <div class="option">
+          <div id="filterRow"></div>
+        </div>
+
+        <div class="option">
+          <div id="headerFilter"></div>
+        </div>
+      </div> -->
+      
+
+    </div>
+  </body>
+</html>

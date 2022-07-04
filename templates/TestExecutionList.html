@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>TestExecutionList</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.light.css" />
+    <script src="https://cdn3.devexpress.com/jslib/21.2.7/js/dx.all.js"></script>
+    <script src="https://unpkg.com/devextreme-aspnet-data@2.8.6/js/dx.aspnet.data.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css"> </linkrel>
+    <script src="../static/js/testExecutionListRowSelection.js"></script>
+  </head>
+  <body class="dx-viewport">
+
+    
+    <div class="sidebar">
+        <a class="active" href="#">시나리오 테스트 목록</a>
+        <a href="#" onclick="location.href='TestDefectList.html'">결함 목록</a>
+        <a href="#">대쉬보드</a>
+        <a href="#">시나리오 테스트 보고서</a>
+        <a href="#" onclick="location.href='UserPage.html'">사용자</a>
+        <a href="#" onclick="location.href='CommonCode.html'" >공통코드</a>
+
+    </div>
+
+    <div class="demo-container" style="margin-left:13%;margin-top:3%;padding:1px 16px;height:1000px;">
+  
+      <div>
+        <div>
+          <div id="file-uploader"></div>
+          <div id="buttonContainer"></div>
+          <div id="createInfo"></div>
+          <div id="executionEditPopup"></div>
+          <div id="deleteButton"></button>
+        </div>
+        <div id="gridContainer"></div>
+        <div id="popup"></div>
+        <div id="popup2"></div>
+        <div id="popup3"></div>
+        <div id="executionInfo" >
+          <p class="executionId"></p>
+          <p class="projectName"></p>
+          <p class="testType"></p>
+          <p class="testTargetType"></p>
+          <p clas="testTargetName"></p>
+          <p class="scenarioType"></p>
+          <p class="scenarioCategory"></p>
+          <p class="bizCategory"></p>
+          <p class="bizDetail"></p>
+          <p class="version"></p>
+          <p class="testScenarioId"></p>
+          <p class="testScenarioName"></p>
+          <p class="screenId"></p>
+          <p class="screenName"></p>
+          <p class="testCaseId"></p>
+          <p class="testCaseName"></p>
+          <p class="tester"></p>
+          <p class="confirmContents"></p>
+          <p class="testData"></p>
+          <p class="buildName"></p>
+          <p class="buildVersion"></p>
+          <p class="note"></p>
+          <p class="execDueDate"></p>
+          <p class="executionDate"></p>
+          <p class="execStatus"></p>
+          <p class="execResult"></p>
+        </div>
+        
+
+
+
+      
+      <!-- <div class="options">
+
+        <div class="caption">Options</div>
+        
+        <div class="option">
+          <span>Apply Filter</span>
+          <div id="useFilterApplyButton"></div>
+        </div>
+
+        <div class="option">
+          <div id="filterRow"></div>
+        </div>
+
+        <div class="option">
+          <div id="headerFilter"></div>
+        </div>
+      </div> -->
+      
+
+    </div>
+  </body>
+</html>
