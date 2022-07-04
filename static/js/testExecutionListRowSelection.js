@@ -869,7 +869,7 @@ $(() => {
     // button
 
     $("#buttonContainer").dxButton({
-        text: 'result update Button',
+        text: 'Result Button',
         onClick: function() {
           if(clickeddata){
           popup.option({
@@ -883,7 +883,7 @@ $(() => {
 
       
       $("#executionEditPopup").dxButton({
-        text: 'edit Button',
+        text: 'Edit Button',
         onClick: function() {
           if(clickeddata){
           popup3.option({
@@ -897,7 +897,7 @@ $(() => {
 
 
     $("#createInfo").dxButton({
-      text: 'new execution',
+      text: 'New Execution',
       onClick: function() {
         popup2.option({
           contentTemplate: () => popupContentTemplate2(),
@@ -910,7 +910,7 @@ $(() => {
 
 
     $("#deleteButton").dxButton({
-      text: 'delete Button',
+      text: 'Delete Button',
       onClick: function() {
       //원래 동작해야 할 이벤트를 중지 시킨다.  
       if(clickeddata){

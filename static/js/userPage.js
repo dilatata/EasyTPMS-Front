@@ -449,7 +449,7 @@ $(() => {
     // button
 
     $("#buttonContainer").dxButton({
-        text: 'user Edit Popup',
+        text: 'Edit Button',
         onClick: function() {
           if(clickeddata){
           popup.option({
@@ -464,7 +464,7 @@ $(() => {
 
 
     $("#createInfo").dxButton({
-      text: 'new execution',
+      text: 'New User',
       onClick: function() {
         popup2.option({
           contentTemplate: () => popupContentTemplate2(),
@@ -477,7 +477,7 @@ $(() => {
 
 
     $("#deleteButton").dxButton({
-      text: 'delete Button',
+      text: 'Delete Button',
       onClick: function() {
       //원래 동작해야 할 이벤트를 중지 시킨다.  
       if(clickeddata){
