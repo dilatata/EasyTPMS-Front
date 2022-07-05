@@ -220,7 +220,7 @@ $(() => {
   $(function() {
     $("#gridContainer").dxDataGrid({
         onRowClick(e) {
-            const data = e.data;
+            let data = e.data;
                 if (data) {
                   $('.executionId').text(`Execution Id : ${data.executionId}`);
                   $('.projectName').text(`Project Name : ${data.projectName}`);
@@ -244,8 +244,8 @@ $(() => {
                   $('.buildName').text(`Build Name : ${data.buildName}`);
                   $('.buildVersion').text(`Build Vertion : ${data.buildVersion}`);
                   $('.note').text(`Note : ${data.note}`);
-                  $('.execDueDate').text(`Execution Due Date : ${data.execDueDate}`);
-                  $('.executionDate').text(`Execution Date : ${data.executionDate}`);
+                  $('.execDueDate').text(`Execution Due Date : ${new Date(data.execDueDate)}`);
+                  $('.executionDate').text(`Execution Date : ${new Date(data.executionDate)}`);
                   $('.execStatus').text(`Execution Status : ${data.execStatus}`);
                   $('.execResult').text(`Execution Result : ${data.execResult}`);
                 };
@@ -308,8 +308,8 @@ $(() => {
 
         <form id="popupForm" name="popupForm">
         <label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
-        <label> Project Name: </label> <input type="text" id="popupProjectName" name ="popupProjectName"value="${clickeddata.projectName}"> <br>
-        <label> Test Type: </label> <input type="text" id="popupTestType" name="popupTestType"value="${clickeddata.testType}"> <br>
+        <label> Project Name: </label> <input type="text" id="popupProjectName" name ="popupProjectName" value="${clickeddata.projectName}"> <br>
+        <label> Test Type: </label> <input type="text" id="popupTestType" name="popupTestType" value="${clickeddata.testType}"> <br>
         <label> Test Target Type: </label> <input type="text" id="popupTestTargetType" name="popupTestTargetType" value="${clickeddata.testTargetType}"> <br>
         <label> Test Target Name: </label> <input type="text" id="popupTestTargetName" name="popupTestTargetName" value="${clickeddata.testTargetName}"> <br>
         <label> Scenario Type: </label> <input type="text" id="popupScenarioType" name="popupScenarioType" value="${clickeddata.scenarioType}"> <br>
@@ -330,8 +330,9 @@ $(() => {
         <label> Build Name: </label> <input type="text" id="popupBuildName" name="popupBuildName" value="${clickeddata.buildName}"> <br>
         <label> Build Version: </label> <input type="text" id="popupBuildVersion" name="popupBuildVersion" value="${clickeddata.buildVersion}"> <br>
         <label> Note: </label> <input type="text" id="popupNote" name="popupNote" value="${clickeddata.note}"> <br>
-        <label> Execution Due Date: </label> <input type="text" id="popupExecutionDueDate" name="popupExecutionDueDate" value="${clickeddata.execDueDate}"> <br>
-        <label> Execution Date: </label> <input type="text" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Due Date: </label> <input type="date" id="popupExecutionDueDate" name="popupExecutionDueDate" value="${clickeddata.execDueDate}"> <br>
+        <label> Execution Date: </label> 
+          <input type="date" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="popupExecutionStatus" id="popupExecutionStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -346,20 +347,20 @@ $(() => {
         <label> ExecutionId Id: </label> <input type="text" id ="popupExecutionId" name="popupExecutionId" placehold="${clickeddata.executionId}" value="${clickeddata.executionId}" readonly/></p>
         <label> Defect Id: </label> <input type="text" id ="popupDefectId" name="popupDefectId" placehold="" value="" readonly/></p>
         <label> Defect Status: </label> <input type="text" id ="popupDefectStatus" name="popupDefectStatus" placehold="" value=""> <br>
-        <label> Create At : </label> <input type="text" id ="popupCreateAt" name="popupCreateAt" placehold="" value=""> <br>
+        <label> Create At : </label> <input type="date" id ="popupCreateAt" name="popupCreateAt" placehold="" value=""> <br>
         <label> Created By: </label> <input type="text" id ="popupCreatedBy" name="popupCreatedBy" placehold="" value=""> <br>
         <label> Defect Contents: </label> <input type="text" id ="popupDefectContents" name="popupDefectContents" placehold="결함 내용을 입력해주세요." value=""> <br>
         
 
         <label> Defect Team: </label> <input type="text" id ="popupDefectTeam" name="popupDefectTeam" placehold="" value=""> <br>
         <label> Defect Charger: </label> <input type="text" id ="popupDefectCharger" name="popupDefectCharger" placehold="" value=""> <br>
-        <label> Defect Start Due Date: </label> <input type="text" id ="popupDefectStartDueDate" name="popupDefectStartDueDate" placehold="" value=""> <br>
-        <label> Defect End Due Date: </label> <input type="text" id ="popupDefectEndDueDate" name="popupDefectEndDueDate" placehold="" value=""> <br>
-        <label> Defect Action Yn: </label> <input type="text" id ="popupDefectActionYn" name="popupDefectActionYn" placehold="" value=""> <br>
-        <label> Defect Action Date: </label> <input type="text" id ="popupDefectActionDate" name="popupDefectActionDate" placehold="" value=""> <br>
-        <label> Defect Action Contents: </label> <input type="text" id ="popupDefectActionContents" name="popupDefectActionContents" placehold="" value=""> <br>
-        <label> Defect Check: </label> <input type="text" id ="popupDefectCheck" name="popupDefectCheck" placehold="" value=""> <br>
-        <label> Defect Check Date: </label> <input type="text" id ="popupDefectCheckDate" name="popupDefectCheckDate" placehold="" value=""> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id ="popupDefectStartDueDate" name="popupDefectStartDueDate" placehold="" value=""> <br>
+        <label> Defect End Due Date: </label> <input type="date" id ="popupDefectEndDueDate" name="popupDefectEndDueDate" placehold="" value=""> <br>
+        <label> Defect Action Yn: </label> <input type="text" id ="popupDefectActionYn" name="popupDefectActionYn" placehold="" value="" readonly/> <br>
+        <label> Defect Action Date: </label> <input type="date" id ="popupDefectActionDate" name="popupDefectActionDate" placehold="" value="" readonly/> <br>
+        <label> Defect Action Contents: </label> <input type="text" id ="popupDefectActionContents" name="popupDefectActionContents" placehold="" value="" readonly/> <br>
+        <label> Defect Check: </label> <input type="text" id ="popupDefectCheck" name="popupDefectCheck" placehold="" value="" readonly/> <br>
+        <label> Defect Check Date: </label> <input type="date" id ="popupDefectCheckDate" name="popupDefectCheckDate" placehold="" value="" readonly/> <br>
         </div>
         </form>`),
       );
@@ -382,7 +383,7 @@ $(() => {
         console.log("template Log"),
         console.log(clickeddata),
         $(`<form id="popupForm" name="popupForm">`),
-        $(`<label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value=""> <br> `),
+        $(`<label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="" readonly/> <br> `),
         $(`<label> Project Name: </label> <input type="text" id="popupProjectName" name ="popupProjectName"value=""> <br>`),
         $(`<label> Test Type: </label> <input type="text" id="popupTestType" name="popupTestType"value=""> <br>`),
         $(`<label> Test Target Type: </label> <input type="text" id="popupTestTargetType" name="popupTestTargetType" value=""> <br>`),
@@ -404,11 +405,16 @@ $(() => {
         $(`<label> Test Data: </label> <input type="text" id="popupTestData" name="popupTestData" value=""> <br>`),
         $(`<label> Build Name: </label> <input type="text" id="popupBuildName" name="popupBuildName" value=""> <br>`),
         $(`<label> Build Version: </label> <input type="text" id="popupBuildVersion" name="popupBuildVersion" value=""> <br>`),
-        $(`<label> Note: </label> <input type="text" id="popupNote" name="popupNote" value="> <br>`),
-        $(`<label> Execution Due Date: </label> <input type="text" id="popupExecutionDueDate" name="popupExecutionDueDate" value=""> <br>`),
-        $(`<label> Execution Date: </label> <input type="text" id="popupExecutionDate" name="popupExecutionDate" value=""> <br>`),
-        $(`<label> Execution Status: </label> <select name="popupExecutionStatus" id="popupExecutionStatus"> <option value="미수행">미수행</option>`),
-        $(`<label> Execution Result: </label> <input type="text" id="popupExecutionResult" name="popupExecutionResult" value=""> <br>`),
+        $(`<label> Note: </label> <input type="text" id="popupNote" name="popupNote" value=""> <br>`),
+        $(`<label> Execution Due Date: </label>
+          <input type="date" id="popupExecutionDueDate" name="popupExecutionDueDate" value="" readonly/> <br>`),
+        $(`<label> Execution Date: </label> 
+          <input type="date" id="popupExecutionDate" name="popupExecutionDate" value="" readonly/> <br>`),
+        $(`<label> Execution Status: </label> 
+          <select name="popupExecutionStatus" id="popupExecutionStatus"> 
+            <option value="미수행">미수행</option>
+          </select>`),
+        $(`<label> Execution Result: </label> <input type="text" id="popupExecutionResult" name="popupExecutionResult" value="" readonly/> <br>`),
         $(`</form>`),
         $('</div>'),
       );
@@ -451,8 +457,10 @@ $(() => {
         <label> Build Name: </label> <input type="text" id="popupBuildName" name="popupBuildName" value="${clickeddata.buildName}"> <br>
         <label> Build Version: </label> <input type="text" id="popupBuildVersion" name="popupBuildVersion" value="${clickeddata.buildVersion}"> <br>
         <label> Note: </label> <input type="text" id="popupNote" name="popupNote" value="${clickeddata.note}"> <br>
-        <label> Execution Due Date: </label> <input type="text" id="popupExecutionDueDate" name="popupExecutionDueDate" value="${clickeddata.execDueDate}"> <br>
-        <label> Execution Date: </label> <input type="text" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Due Date: </label> 
+          <input type="date" id="popupExecutionDueDate" name="popupExecutionDueDate" value="${clickeddata.execDueDate}"> <br>
+        <label> Execution Date: </label> 
+          <input type="date" id="popupExecutionDate" name="popupExecutionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="popupExecutionStatus" id="popupExecutionStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -540,12 +548,13 @@ $(() => {
               'buildVersion': $("#popupBuildVersion").val(),
               'note': $("#popupNote").val(),
               'execDueDate': $("#popupExecutionDueDate").val(),
-              'executionDate': $("#popupExecutionDate").val(),
+              // 'executionDate': $("#popupExecutionDate").val(),
+              'executionDate': new Date(),
               'execStatus': $("#popupExecutionStatus").val(),
               'execResult': $("#popupExecutionResult").val(),
               'testDefectList': [
                 {
-                  "createAt": $("#popupCreateAt").val(),
+                  "createAt": new Date(),
                   "createdBy": $("#popupCreatedBy").val(),
                   "defectActionContents": $("#popupDefectActionContents").val(),
                   "defectActionYn": $("#popupDefectActionYn").val(),
@@ -593,6 +602,7 @@ $(() => {
                 
               } else{
                 //Ajax POST Method TEST -> result 성공 입력
+                console.log('상태 성공');
               $.ajax({
                 url: `${url}/execution/result/${clickeddata.executionId}`,
                   dataType: 'json',
@@ -641,6 +651,7 @@ $(() => {
 
 
 
+    // create execution
     const popup2 = $("#popup2").dxPopup({
       contentTemplate: popupContentTemplate2,
       width: 500,
@@ -691,13 +702,15 @@ $(() => {
               'buildVersion': $("#popupBuildVersion").val(),
               'note': $("#popupNote").val(),
               'execDueDate': $("#popupExecutionDueDate").val(),
-              'executionDate': $("#popupExecutionDate").val(),
+              'executionDate': new Date(),
               'execStatus': $("#popupExecutionStatus").val(),
               'execResult': $("#popupExecutionResult").val(),
             };
 
             // 오브젝트 json 타입으로 변경
             var json = JSON.stringify(data);
+
+            console.log(json);
 
             //Ajax POST Method TEST -> new execution create
             $.ajax({
@@ -712,7 +725,7 @@ $(() => {
                     }
                 }
               }); 
-
+              getData();
             // popup 창 위의 정보들을 json 형태로 POST method 연결하기
             let message = "정보를 생성했습니다!"
             DevExpress.ui.notify({
@@ -723,7 +736,7 @@ $(() => {
               },
             }, 'success', 3000);
 
-            getData();
+            
             popup2.hide();
           },
         },
@@ -796,11 +809,12 @@ $(() => {
             'buildName': $("#popupBuildName").val(),
             'buildVersion': $("#popupBuildVersion").val(),
             'note': $("#popupNote").val(),
-            'execDueDate': $("#popupExecutionDueDate").val(),
+            'execDueDate': new Date($("#popupExecutionDueDate").val()),
             'executionDate': $("#popupExecutionDate").val(),
             'execStatus': $("#popupExecutionStatus").val(),
             'execResult': $("#popupExecutionResult").val(),
           };
+          
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);

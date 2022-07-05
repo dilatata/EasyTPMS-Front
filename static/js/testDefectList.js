@@ -262,6 +262,8 @@ $(() => {
 
     // 선택 데이터 정보 변수
   let clickeddata = null;
+  // let sysdate = new Date();
+  // let formatSysdate = sysdate.format('{yyyy}-{MM}-{dd}');
 
   // 하단 정보보기
   $(function() {
@@ -269,9 +271,7 @@ $(() => {
         onRowClick(e) {
             let data = e.data;
                 if (data) {
-                  console.log("low click data");
-                  console.log(data);
-                  $('.executionId').text(`Execution Id : ${data.executionId}`);
+                  $('.executionId').text('Execution Id :'+ `${data.executionId}`);
                   $('.testType').text(`Test Type : ${data.testType}`);
                   $('.scenarioType').text(`Scenario Type : ${data.scenarioType}`);
                   $('.scenarioCategory').text(`Scenario Category : ${data.scenarioCategory}`);
@@ -280,32 +280,30 @@ $(() => {
                   $('.testScenarioName').text(`Test Scenario Name : ${data.testScenarioName}`);
                   $('.testCaseId').text(`Test Case Id : ${data.testCaseId}`);
                   $('.testCaseName').text(`Test Case Name : ${data.testCaseName}`);
-                  
+                  console.log(data.createAt,new Date(data.createAt));
                   $('.defectId').text(`defectId : ${data.defectId}`);
                   $('.defectCategory').text(`defectCategory : ${data.defectCategory}`);
                   $('.defectContents').text(`defectContents : ${data.defectContents}`);
                   $('.createdBy').text(`createdBy : ${data.createdBy}`);
-                  $('.createAt').text(`createAt : ${data.createAt}`);
+                  $('.createAt').text(`createAt : ${new Date(data.createAt)}`);
                   $('.defectTeam').text(`defectTeam : ${data.defectTeam}`);
                   $('.defectCharger').text(`defectCharger : ${data.defectCharger}`);
-                  $('.defectStartDueDate').text(`defectStartDueDate : ${data.defectStartDueDate}`);
-                  $('.defectEndDueDate').text(`defectEndDueDate : ${data.defectEndDueDate}`);
+                  $('.defectStartDueDate').text(`defectStartDueDate : ${new Date(data.defectStartDueDate)}`);
+                  $('.defectEndDueDate').text(`defectEndDueDate : ${new Date(data.defectEndDueDate)}`);
                   $('.defectStatus').text(`defectStatus : ${data.defectStatus}`);
-
-                  $('.defectDate').text(`defectDate : ${data.defectDate}`);
+                  console.log(new Date(data.defectDate));
+                  $('.defectDate').text(`defectDate : ${new Date(data.defectDate)}`);
                   $('.defectActionYn').text(`defectActionYn : ${data.defectActionYn}`);
                   $('.defectActionContents').text(`defectActionContents : ${data.defectActionContents}`);
                   $('.defectCheck').text(`defectCheck : ${data.defectCheck}`);
-                  $('.defectCheckDate').text(`defectCheckDate : ${data.defectCheckDate}`);
+                  $('.defectCheckDate').text(`defectCheckDate : ${new Date(data.defectCheckDate)}`);
 
-                  $('.executionDate').text(`Execution Date : ${data.executionDate}`);
+                  $('.executionDate').text(`Execution Date : ${new Date(data.executionDate)}`);
                   $('.execStatus').text(`Execution Status : ${data.execStatus}`);
                   $('.execResult').text(`Execution Result : ${data.execResult}`);
 
                 };
             clickeddata = data;
-            console.log("clickeddata 확인");
-            console.log(clickeddata);
         },
     })
 });
@@ -322,18 +320,6 @@ $(() => {
     const scrollView = $('<div>');
     scrollView.append(
         $(`
-        <script>
-      function(){
-        let result = ${clickeddata.defectActionYn}};
-        console.log(result);
-        if ( result == "y"){
-          $("#defectCheckInfo").show();
-        } else{
-          $("#defectCheckInfo").hide();
-        }
-      });
-        </script>
-
         <form id="popupForm" name="popupForm">
         <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
         <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}" readonly/> <br>
@@ -347,7 +333,7 @@ $(() => {
         <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
+        <label> Execution Date: </label> <input type="date" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -358,17 +344,17 @@ $(() => {
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
         <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value="${clickeddata.defectContents}"> <br>
         <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value="${clickeddata.createdBy}"> <br>
-        <label> Create At: </label> <input type="text" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
+        <label> Create At: </label> <input type="date" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
         
         <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
         <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
         
         <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
-        <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
+        <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
         <br>
         <label> Defect Action Yn: </label> 
           <select id="defectActionYn" name="defectActionYn" value="">
@@ -386,7 +372,7 @@ $(() => {
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${Date(clickeddata.defectCheckDate)}"> <br>
         </div>
         </form>`),
       );
@@ -406,18 +392,6 @@ $(() => {
       const scrollView = $('<div>');
       scrollView.append(
           $(`
-          <script>
-        function(){
-          let result = ${clickeddata.defectActionYn}};
-          console.log(result);
-          if ( result == "y"){
-            $("#defectCheckInfo").show();
-          } else{
-            $("#defectCheckInfo").hide();
-          }
-        });
-          </script>
-  
           <form id="popupForm" name="popupForm">
           <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
           <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}" readonly/> <br>
@@ -431,7 +405,7 @@ $(() => {
           <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
    
           <br>
-          <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
+          <label> Execution Date: </label> <input type="date" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
           <label> Execution Status: </label> 
             <select name="execStatus" id="execStatus" value="">
               <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -447,12 +421,12 @@ $(() => {
           <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
           <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
           
-          <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-          <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+          <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+          <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
           
           <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
           
-          <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
+          <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
           <br>
           <label> Defect Action Yn: </label> 
             <select id="defectActionYn" name="defectActionYn" value="">
@@ -468,7 +442,7 @@ $(() => {
               <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${Date(clickeddata.defectCheckDate)}" readonly/> <br>
   
           </form>`),
         );
@@ -493,7 +467,7 @@ $(() => {
     scrollView.append(
       $(`
       <form id="popupForm" name="popupForm">
-        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="" > <br>
+        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value=""> <br>
       
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value=""> <br>
         <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value=""> <br>
@@ -503,8 +477,8 @@ $(() => {
         <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value=""> <br>
         <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value=""> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value=""> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value=""> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value=""> <br>
+        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value=""> <br>
         
         <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="New" readonly/> <br>
         </form>`),
@@ -537,7 +511,7 @@ $(() => {
         <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
+        <label> Execution Date: </label> <input type="date" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -553,12 +527,13 @@ $(() => {
         <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
         <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
         
         <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
-        <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
+        <label> Defect Date: </label> 
+          <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
         <br>
         <label> Defect Action Yn: </label> 
           <select id="defectActionYn" name="defectActionYn" value="">
@@ -576,7 +551,7 @@ $(() => {
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value="sysdate.toLocaleDateString();"> <br>
         </div>
         </form>`),
       );
@@ -633,7 +608,7 @@ $(() => {
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("save click");
+          console.log("result actionYn save click");
 
 
           // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
@@ -650,7 +625,7 @@ $(() => {
             'defectStartDueDate': $("#defectStartDueDate").val(),
             'defectEndDueDate': $("#defectEndDueDate").val(),
             'defectStatus': $("#defectStatus").val(),
-            'defectDate': $("#defectDate").val(),
+            'defectDate': new Data(),
             'defectActionYn': $("#defectActionYn").val(),
             'defectActionContents': $("#defectActionContents").val(),
             'defectCheck': $("#defectCheck").val(),
@@ -733,7 +708,7 @@ $(() => {
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("save click");
+          console.log("defect check save click");
 
 
           // var data = $("#popupForm").serialize();
@@ -753,16 +728,17 @@ $(() => {
             'defectActionYn': $("#defectActionYn").val(),
             'defectActionContents': $("#defectActionContents").val(),
             'defectCheck': $("#defectCheckYn").val(),
-            'defectCheckDate': $("#defectCheckDate").val(),
+            'defectCheckDate': new Data(),
           };
+          console.log('data stringify 전: ', data);
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
+
+          console.log(json);
           
-          console.log('defectCheck 데이터 확인:', $("#defectCheckYn").val(),'=====');
 
           if (`${clickeddata.defectActionYn}` =='y' && $("#defectCheckYn").val() != null) {
-            console.log('defectcheck Y', data);
             $.ajax({
               url: `${url}/defect/check/${clickeddata.defectId}`,
                 dataType: 'json',
@@ -845,7 +821,7 @@ $(() => {
             'defectCategory' : $("#defectCategory").val(),
             'defectContents' : $("#defectContents").val(),
             'createdBy' : $("createdBy").val(),
-            'createAt' : $("createAt").val(),
+            'createAt' : new Data(),
             'defectTeam' : $("#defectTeam").val(),
             'defectCharger': $("#defectCharger").val(),
             'defectStartDueDate': $("#defectStartDueDate").val(),
@@ -860,7 +836,6 @@ $(() => {
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
-          console.log("create data", json);
 
           //Ajax POST Method TEST -> new execution create
           $.ajax({
@@ -930,7 +905,7 @@ $(() => {
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("save click");
+          console.log("edit popup save click");
 
           // var data = $("#popupForm").serialize();
           var data = { 
@@ -1015,7 +990,6 @@ $(() => {
 
 
   //button
-   // button
 
    $("#buttonContainer").dxButton({
     text: 'Result Button',
@@ -1080,8 +1054,6 @@ $("#deleteButton").dxButton({
   var data = {
     'defectId' : clickeddata.defectId
   };
-
-  console.log(data);
 
   //위에서 만든 오브젝트를 json 타입으로 바꾼다.
   var json = JSON.stringify(data);
