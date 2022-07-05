@@ -1,6 +1,6 @@
 $(() => {
 
-  const url = 'http://192.168.219.106:8080';
+  const url = 'http://192.168.219.103:8080';
 
 
   function getData() {
@@ -267,7 +267,7 @@ $(() => {
   $(function() {
     $("#gridContainer").dxDataGrid({
         onRowClick(e) {
-            const data = e.data;
+            let data = e.data;
                 if (data) {
                   console.log("low click data");
                   console.log(data);
@@ -317,14 +317,14 @@ $(() => {
 
 
 
-  // popup template 수정
-  const popupContentTemplate = function () {
+  // defect result popup
+  const popupContentTemplate = function() {
     const scrollView = $('<div>');
     scrollView.append(
         $(`
         <script>
       function(){
-        let result = $('#popupExecutionStatus1').val();
+        let result = ${clickeddata.defectActionYn}};
         console.log(result);
         if ( result == "y"){
           $("#defectCheckInfo").show();
@@ -336,23 +336,23 @@ $(() => {
 
         <form id="popupForm" name="popupForm">
         <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
-        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}"> <br>
-        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}"> <br>
-        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}"> <br>
-        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
-        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}"> <br>
-        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}"> <br>
-        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}"> <br>
-        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}"> <br>
-        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}"> <br>
+        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}" readonly/> <br>
+        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}" readonly/> <br>
+        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}" readonly/> <br>
+        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}" readonly/> <br>
+        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}" readonly/> <br>
+        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}" readonly/> <br>
+        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}" readonly/> <br>
+        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}" readonly/> <br>
+        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
           </select> <br>
-        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}">
+        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}" readonly/>
         <br>
         
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
@@ -398,17 +398,102 @@ $(() => {
 
       return scrollView;
     };
+
+
+
+    // defect check popup
+    const popupContentTemplate4 = function() {
+      const scrollView = $('<div>');
+      scrollView.append(
+          $(`
+          <script>
+        function(){
+          let result = ${clickeddata.defectActionYn}};
+          console.log(result);
+          if ( result == "y"){
+            $("#defectCheckInfo").show();
+          } else{
+            $("#defectCheckInfo").hide();
+          }
+        });
+          </script>
+  
+          <form id="popupForm" name="popupForm">
+          <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
+          <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}" readonly/> <br>
+          <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}" readonly/> <br>
+          <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}" readonly/> <br>
+          <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}" readonly/> <br>
+          <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}" readonly/> <br>
+          <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}" readonly/> <br>
+          <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}" readonly/> <br>
+          <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}" readonly/> <br>
+          <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
+   
+          <br>
+          <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
+          <label> Execution Status: </label> 
+            <select name="execStatus" id="execStatus" value="">
+              <option value="" selected disabled>${clickeddata.execStatus}</option>
+            </select> <br>
+          <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}" readonly/>
+          <br>
+          
+          <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
+          <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value="${clickeddata.defectContents}"> <br>
+          <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value="${clickeddata.createdBy}"> <br>
+          <label> Create At: </label> <input type="text" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
+          
+          <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
+          <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
+          
+          <label> Defect Start Due Date: </label> <input type="text" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
+          <label> Defect End Due Date: </label> <input type="text" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+          
+          <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
+          
+          <label> Defect Date: </label> <input type="text" id="defectDate" name="defectDate" value="${clickeddata.defectDate}"> <br>
+          <br>
+          <label> Defect Action Yn: </label> 
+            <select id="defectActionYn" name="defectActionYn" value="">
+              <option value="" selected disabled>${clickeddata.defectActionYn}</option> <br>
+            </select><br>
+          <label> Defect Action Contents: </label> <input type="text" id="defectActionContents" name="defectActionContents" value="${clickeddata.defectActionContents}"> <br>
+          
+
+          <label> Defect Check: </label> 
+            <select id="defectCheckYn" name="defectCheck" value="">
+              <option value="" selected disabled>${clickeddata.defectCheck}</option> <br>
+              <option value="n">n </option>
+              <option value="y">y </option>
+            </select><br>
+          <label> Defect Check Date: </label> 
+            <input type="text" id="defectCheckDate" name="defectCheckDate" value="${clickeddata.defectCheckDate}"> <br>
+  
+          </form>`),
+        );
+  
+        scrollView.dxScrollView({
+          width: '100%',
+          height: '100%',
+        });
+  
+        return scrollView;
+      };
+
+
+
+
   
 
 
-  // popup2 -> new execution create
-  // popup
-  const popupContentTemplate2 = function () {
+  // popup2 -> new defect create
+  const popupContentTemplate2 = function() {
     const scrollView = $('<div>');
     scrollView.append(
       $(`
       <form id="popupForm" name="popupForm">
-        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="" readonly/> <br>
+        <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="" > <br>
       
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value=""> <br>
         <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value=""> <br>
@@ -434,30 +519,30 @@ $(() => {
     };
 
 
-    // popup template 수정
+    // edit popup template 
   const popupContentTemplate3 = function () {
     const scrollView = $('<div>');
     scrollView.append(
         $(`
         <form id="popupForm" name="popupForm">
         <label> Execution Id: </label> <input type="text" id="executionId" name="executionId" value="${clickeddata.executionId}" readonly/> <br>
-        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}"> <br>
-        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}"> <br>
-        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}"> <br>
-        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}"> <br>
-        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}"> <br>
-        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}"> <br>
-        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}"> <br>
-        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}"> <br>
-        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}"> <br>
+        <label> Defect Id: </label> <input type="text" id="defectId" name ="defectId" value="${clickeddata.defectId}" readonly/> <br>
+        <label> Test Type: </label> <input type="text" id="testType" name="testType"value="${clickeddata.testType}" readonly/> <br>
+        <label> Scenario Type: </label> <input type="text" id="scenarioType" name="scenarioType" value="${clickeddata.scenarioType}" readonly/> <br>
+        <label> Scenario Category: </label> <input type="text" id="scenarioCategory" name="scenarioCategory" value="${clickeddata.scenarioCategory}" readonly/> <br>
+        <label> Version: </label> <input type="text" id="version" name="version" value="${clickeddata.version}" readonly/> <br>
+        <label> Test Scenario Id: </label> <input type="text" id="testScenarioId" name="testScenarioId" value="${clickeddata.testScenarioId}" readonly/> <br>
+        <label> Test Scenario Name: </label> <input type="text" id="testScenarioName" name="testScenarioName" value="${clickeddata.testScenarioName}" readonly/> <br>
+        <label> Test Case Id: </label> <input type="text" id="testCaseId" name="testCaseId" value="${clickeddata.testCaseId}" readonly/> <br>
+        <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}"> <br>
+        <label> Execution Date: </label> <input type="text" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
           </select> <br>
-        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}">
+        <label> Execution Result: </label> <input type="text" id="execResult" name="execResult" value="${clickeddata.execResult}" readonly/>
         <br>
         
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
@@ -523,9 +608,9 @@ $(() => {
 
 
 
- // popup 기능
+ // popup
 
-  // 수정 팝업
+  // result 입력 popup
   const popup = $("#popup").dxPopup({
     contentTemplate: popupContentTemplate,
     width: 500,
@@ -573,22 +658,28 @@ $(() => {
           };
 
 
+
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
 
-            $.ajax({
-              url: `${url}/defect/update/result/${clickeddata.defectId}`,
-                dataType: 'json',
-                type: 'POST',
-                data: json,
-                contentType: "application/json; charset=UTF-8",
-                success: function(json) {
-                    if (json) {
-                      console.log('endend');
-                    }
-                }
-              });
-                  
+          // defect action yn 의 경우
+          if (`${clickeddata.defectActionYn}` =='n' &&  $("#defectActionYn").val() == 'y'){
+          $.ajax({
+            url: `${url}/defect/update/result/${clickeddata.defectId}`,
+              dataType: 'json',
+              type: 'POST',
+              data: json,
+              contentType: "application/json; charset=UTF-8",
+              success: function(json) {
+                  if (json) {
+                    console.log('endend');
+                  }
+              }
+            });
+          }
+
+
+            getData();
           // popup 창 위의 정보들을 json 형태로 POST method 연결하기
           let message = "정보를 수정했습니다!"
           DevExpress.ui.notify({
@@ -598,7 +689,7 @@ $(() => {
               at: 'center top',
             },
           }, 'success', 3000);
-          getData();
+          
           popup.hide();
           // grid 에 reload 해야함
         },
@@ -611,6 +702,108 @@ $(() => {
         text: 'Close',
         onClick() {
           popup.hide();
+        },
+      },
+    }],
+  }).dxPopup('instance');
+
+
+
+  // defect check popup
+
+  const popup4 = $("#popup4").dxPopup({
+    contentTemplate: popupContentTemplate4,
+    width: 500,
+    height: 500,
+    container: '.dx-viewport',
+    showTitle: true,
+    title: 'Information',
+    dragEnabled: false,
+    hideOnOutsideClick: false,
+    showCloseButton: true,
+    position: {
+      at: 'center',
+      my: 'center',
+    },
+    toolbarItems: [{
+      widget: 'dxButton',
+      toolbar: 'bottom',
+      location: 'before',
+      options: {
+        text: 'Save',
+        type: 'submit',
+        onClick() {
+          console.log("save click");
+
+
+          // var data = $("#popupForm").serialize();
+          var data = { 
+            'executionId' : $("#executionId").val(),
+            'defectId' : $("#defectId").val(),
+            'defectCategory' : $("#defectCategory").val(),
+            'defectContents' : $("#defectContents").val(),
+            'createdBy' : $("createdBy").val(),
+            'createAt' : $("createAt").val(),
+            'defectTeam' : $("#defectTeam").val(),
+            'defectCharger': $("#defectCharger").val(),
+            'defectStartDueDate': $("#defectStartDueDate").val(),
+            'defectEndDueDate': $("#defectEndDueDate").val(),
+            'defectStatus': $("#defectStatus").val(),
+            'defectDate': $("#defectDate").val(),
+            'defectActionYn': $("#defectActionYn").val(),
+            'defectActionContents': $("#defectActionContents").val(),
+            'defectCheck': $("#defectCheckYn").val(),
+            'defectCheckDate': $("#defectCheckDate").val(),
+          };
+
+          // 오브젝트 json 타입으로 변경
+          var json = JSON.stringify(data);
+          
+          console.log('defectCheck 데이터 확인:', $("#defectCheckYn").val(),'=====');
+
+          if (`${clickeddata.defectActionYn}` =='y' && $("#defectCheckYn").val() != null) {
+            console.log('defectcheck Y', data);
+            $.ajax({
+              url: `${url}/defect/check/${clickeddata.defectId}`,
+                dataType: 'json',
+                type: 'POST',
+                data: json,
+                contentType: "application/json; charset=UTF-8",
+                success: function(json) {
+                    if (json) {
+                      console.log('endend');
+                    }
+                }
+              });
+            } else{
+              console.log('something happen');
+            
+            }
+
+
+            getData();
+          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
+          let message = "defect check!"
+          DevExpress.ui.notify({
+            message,
+            position: {
+              my: 'center top',
+              at: 'center top',
+            },
+          }, 'success', 3000);
+          
+          popup4.hide();
+          // grid 에 reload 해야함
+        },
+      },
+    }, {
+      widget: 'dxButton',
+      toolbar: 'bottom',
+      location: 'after',
+      options: {
+        text: 'Close',
+        onClick() {
+          popup4.hide();
         },
       },
     }],
@@ -667,6 +860,7 @@ $(() => {
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
+          console.log("create data", json);
 
           //Ajax POST Method TEST -> new execution create
           $.ajax({
@@ -675,8 +869,8 @@ $(() => {
               type: 'POST',
               data: json,
               contentType: "application/json; charset=UTF-8",
-              success: function(json) {
-                  if (json) {
+              success: function(data) {
+                  if (data) {
                     console.log('endend');
                   }
               }
@@ -714,7 +908,7 @@ $(() => {
 
 
 // edit popup
-  const popup3 = $("#popup").dxPopup({
+  const popup3 = $("#popup3").dxPopup({
     contentTemplate: popupContentTemplate3,
     width: 500,
     height: 500,
@@ -738,28 +932,44 @@ $(() => {
         onClick() {
           console.log("save click");
 
-
-          // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
-          var data = $("#popupForm").serialize();
-
+          // var data = $("#popupForm").serialize();
+          var data = { 
+            'executionId' : $("#executionId").val(),
+            'defectId' : $("#defectId").val(),
+            'defectCategory' : $("#defectCategory").val(),
+            'defectContents' : $("#defectContents").val(),
+            'createdBy' : $("createdBy").val(),
+            'createAt' : $("createAt").val(),
+            'defectTeam' : $("#defectTeam").val(),
+            'defectCharger': $("#defectCharger").val(),
+            'defectStartDueDate': $("#defectStartDueDate").val(),
+            'defectEndDueDate': $("#defectEndDueDate").val(),
+            'defectStatus': $("#defectStatus").val(),
+            'defectDate': $("#defectDate").val(),
+            'defectActionYn': $("#defectActionYn").val(),
+            'defectActionContents': $("#defectActionContents").val(),
+            'defectCheck': $("#defectCheck").val(),
+            'defectCheckDate': $("#defectCheckDate").val(),
+          };
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
 
-            $.ajax({
-              url: `${url}/defect/edit/detail/${clickeddata.defectId}`,
-                dataType: 'json',
-                type: 'POST',
-                data: json,
-                contentType: "application/json; charset=UTF-8",
-                success: function(json) {
-                    if (json) {
-                      console.log('endend');
-                    }
-                }
-              });
-                  
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
+          $.ajax({
+            url: `${url}/defect/edit/detail/${clickeddata.defectId}`,
+              dataType: 'json',
+              type: 'POST',
+              data: json,
+              contentType: "application/json; charset=UTF-8",
+              success: function(json) {
+                  if (json) {
+                    console.log('endend');
+                  }
+              }
+            });
+            
+          getData();
+
           let message = "정보를 수정했습니다!"
           DevExpress.ui.notify({
             message,
@@ -769,7 +979,6 @@ $(() => {
             },
           }, 'success', 3000);
 
-          getData();
           popup3.hide();
           // grid 에 reload 해야함
         },
@@ -817,6 +1026,19 @@ $(() => {
         'position.of': `#gridContainer`,
       });
       popup.show();
+    }
+    },
+  });
+
+  $("#defectCheck").dxButton({
+    text: 'Defect Check Button',
+    onClick: function() {
+      if(clickeddata){
+      popup4.option({
+        contentTemplate: () => popupContentTemplate4(),
+        'position.of': `#gridContainer`,
+      });
+      popup4.show();
     }
     },
   });
