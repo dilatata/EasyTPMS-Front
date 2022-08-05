@@ -16,25 +16,26 @@
   <body class="dx-viewport">
 
     
-    <div class="sidebar">
-        <a href="#" onclick="location.href='TestExecutionList.html'">시나리오 테스트 목록</a>
-        <a href="#" onclick="location.href='TestDefectList.html'">결함 목록</a>
-        <a href="#">대쉬보드</a>
-        <a href="#">시나리오 테스트 보고서</a>
-        <a class="active" href="#" onclick="location.href='UserPage.html'">사용자</a>
-        <a href="#" onclick="location.href='CommonCode.html'" >공통코드</a>
+    <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a onclick="location.href='TestExecutionList.html'">시나리오 테스트 목록</a>
+        <a onclick="location.href='TestDefectList.html'">결함 목록</a>
+        <a >대쉬보드</a>
+        <a >시나리오 테스트 보고서</a>
+        <a class="active" onclick="location.href='UserPage.html'">사용자</a>
+        <a onclick="location.href='CommonCode.html'" >공통코드</a>
 
     </div>
 
-    <div class="demo-container" style="margin-left:13%;margin-top:3%;padding:1px 16px;height:1000px;">
-  
-      <div>
-        <div>
+    <div id="main" class="demo-container">
+      <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
 
+      <div>
+        <div id="buttonBox" style="display:flex">
           <div id="buttonContainer"></div>
           <div id="createInfo"></div>
           <div id="userEditPopup"></div>
-          <div id="deleteButton"></button>
+          <div id="deleteButton"></div>
         </div>
         <div id="gridContainer"></div>
         <div id="popup"></div>
@@ -47,29 +48,18 @@
           <p class="roleType"></p>
         </div>
         
-
-
-
-      
-      <!-- <div class="options">
-
-        <div class="caption">Options</div>
-        
-        <div class="option">
-          <span>Apply Filter</span>
-          <div id="useFilterApplyButton"></div>
-        </div>
-
-        <div class="option">
-          <div id="filterRow"></div>
-        </div>
-
-        <div class="option">
-          <div id="headerFilter"></div>
-        </div>
-      </div> -->
-      
-
     </div>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+      }
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 $(() => {
 
-  const url = 'http://192.168.219.103:8080';
-
+  const url = 'http://192.168.219.140:8080';
+  // const url = 'http://192.168.0.43:8080';
 
   function getData() {
     $('#gridContainer').dxDataGrid({
@@ -13,6 +13,15 @@ $(() => {
         },
       }),
     });
+  };
+
+  function getFormatDate(data) {
+    var year = data.getFullYear();
+    var month = (1+ data.getMonth());
+    month = month >= 10? month:'0' + month;
+    var day = data.getDate();
+    day = day >= 10 ? day :'0' +day;
+    return year + '-' + month + '-' + day;
   };
 
 
@@ -225,35 +234,7 @@ $(() => {
       key: 'onClick',
       name: 'On Button Click',
     }];
-  
-    const applyFilterModeEditor = $('#useFilterApplyButton').dxSelectBox({
-      items: applyFilterTypes,
-      value: applyFilterTypes[0].key,
-      valueExpr: 'key',
-      displayExpr: 'name',
-      onValueChanged(data) {
-        dataGrid.option('filterRow.applyFilter', data.value);
-      },
-    }).dxSelectBox('instance');
-  
-    $('#filterRow').dxCheckBox({
-      text: 'Filter Row',
-      value: true,
-      onValueChanged(data) {
-        dataGrid.clearFilter();
-        dataGrid.option('filterRow.visible', data.value);
-        applyFilterModeEditor.option('disabled', !data.value);
-      },
-    });
-  
-    $('#headerFilter').dxCheckBox({
-      text: 'Header Filter',
-      value: true,
-      onValueChanged(data) {
-        dataGrid.clearFilter();
-        dataGrid.option('headerFilter.visible', data.value);
-      },
-    });
+
 
 
 
@@ -262,14 +243,74 @@ $(() => {
 
     // 선택 데이터 정보 변수
   let clickeddata = null;
-  // let sysdate = new Date();
-  // let formatSysdate = sysdate.format('{yyyy}-{MM}-{dd}');
+  let commonCodeUseYnList = [];
+
+  // 공통코드 리스트로 받아오기
+  function useYnList(codeGroupId) {
+    // 이렇게 바로 code 넣어도 되는건가..?
+    // var codeGroupId = 1;
+
+    let commonCodeList = [];
+    $.ajax({
+      url: `${url}/common/detail/${codeGroupId}`,
+      type: "GET",
+      processData: false,
+      contentType: false,
+      dataType:'json',
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function (rtn) {
+        console.log("rtn : ",rtn);
+        // alert("공통코드 정보 : " + rtn[0].codeDetailDesc);
+        for(var i=0; i<rtn.length; i++){
+          commonCodeList.push({"text" : rtn[i].codeDetailDesc, "value" : rtn[i].codeDetailName});
+        };
+        // commonCodeUseYnList = [{'text' : rtn[0].codeDetailDesc, 'value' : rtn[0].codeDetailName},{'text': rtn[0].codeDetailDesc , 'value': rtn[1].codeDetailName}];
+        console.log('success , common code list: ',commonCodeList);
+        // commonCodeUseYnList = JSON.stringify(commonCodeList);
+        commonCodeUseYnList = commonCodeList;
+      },
+      error: function (e) {
+        console.log("err:", e);
+        alert("!error happend!");
+      }
+    });  
+  };
 
   // 하단 정보보기
   $(function() {
     $("#gridContainer").dxDataGrid({
         onRowClick(e) {
             let data = e.data;
+            clickeddata = data;
+            localStorage.setItem("clickedDefectId", clickeddata.defectId);
+            localStorage.setItem("defectOnRowclick", JSON.stringify(clickeddata));
+
+            console.log("clickeddata",clickeddata);
+
+        if (commonCodeUseYnList.length == 0){
+        useYnList(1);
+        console.log(commonCodeUseYnList.length);
+        console.log('1st time common code use yn list : ', commonCodeUseYnList);
+
+        
+
+        } else {
+        console.log('commonCodeUseYnList already exist : ', commonCodeUseYnList);
+
+        popup.option({
+          contentTemplate: () => popupContentTemplate(),
+          'position.of': `#gridContainer`,
+        });
+        
+
+        console.log("popup 전에 길이 확인하기 : ",commonCodeUseYnList.length); //0 -> 이러면 안돼는데!!
+
+        popup.show();
+        }
+
                 if (data) {
                   $('.executionId').text('Execution Id :'+ `${data.executionId}`);
                   $('.testType').text(`Test Type : ${data.testType}`);
@@ -280,34 +321,42 @@ $(() => {
                   $('.testScenarioName').text(`Test Scenario Name : ${data.testScenarioName}`);
                   $('.testCaseId').text(`Test Case Id : ${data.testCaseId}`);
                   $('.testCaseName').text(`Test Case Name : ${data.testCaseName}`);
-                  console.log(data.createAt,new Date(data.createAt));
+                  console.log( '찍어보기', data.createAt, new Date(data.createAt));
                   $('.defectId').text(`defectId : ${data.defectId}`);
                   $('.defectCategory').text(`defectCategory : ${data.defectCategory}`);
                   $('.defectContents').text(`defectContents : ${data.defectContents}`);
                   $('.createdBy').text(`createdBy : ${data.createdBy}`);
-                  $('.createAt').text(`createAt : ${new Date(data.createAt)}`);
+                  $('.createAt').text(`createAt : ${getFormatDate(new Date(data.createAt))}`);
                   $('.defectTeam').text(`defectTeam : ${data.defectTeam}`);
                   $('.defectCharger').text(`defectCharger : ${data.defectCharger}`);
-                  $('.defectStartDueDate').text(`defectStartDueDate : ${new Date(data.defectStartDueDate)}`);
-                  $('.defectEndDueDate').text(`defectEndDueDate : ${new Date(data.defectEndDueDate)}`);
+                  $('.defectStartDueDate').text(`defectStartDueDate : ${getFormatDate(new Date(data.defectStartDueDate))}`);
+                  $('.defectEndDueDate').text(`defectEndDueDate : ${getFormatDate(new Date(data.defectEndDueDate))}`);
                   $('.defectStatus').text(`defectStatus : ${data.defectStatus}`);
-                  console.log(new Date(data.defectDate));
-                  $('.defectDate').text(`defectDate : ${new Date(data.defectDate)}`);
+                  $('.defectDate').text(`defectDate : ${getFormatDate(new Date(data.defectDate))}`);
                   $('.defectActionYn').text(`defectActionYn : ${data.defectActionYn}`);
                   $('.defectActionContents').text(`defectActionContents : ${data.defectActionContents}`);
                   $('.defectCheck').text(`defectCheck : ${data.defectCheck}`);
-                  $('.defectCheckDate').text(`defectCheckDate : ${new Date(data.defectCheckDate)}`);
+                  $('.defectCheckDate').text(`defectCheckDate : ${getFormatDate(new Date(data.defectCheckDate))}`);
 
-                  $('.executionDate').text(`Execution Date : ${new Date(data.executionDate)}`);
+                  $('.executionDate').text(`Execution Date : ${getFormatDate(new Date(data.executionDate))}`);
                   $('.execStatus').text(`Execution Status : ${data.execStatus}`);
                   $('.execResult').text(`Execution Result : ${data.execResult}`);
 
                 };
-            clickeddata = data;
+            
         },
     })
 });
 
+function createSelectBoxAndOptions(selectId, listData){
+  var select = document.getElementById(selectId);
+  for(var i in listData){
+    var option = document.createElement("option");
+    option.value = listData[i].value;
+    option.text = listData[i].text;
+    select.appendChild(option);
+  }
+};
 
 
 
@@ -333,7 +382,7 @@ $(() => {
         <label> Test Case Name: </label> <input type="text" id="testCaseName" name="testCaseName" value="${clickeddata.testCaseName}" readonly/> <br>
  
         <br>
-        <label> Execution Date: </label> <input type="date" id="executionDate" name="executionDate" value="${clickeddata.executionDate}" readonly/> <br>
+        <label> Execution Date: </label> <input type="date" id="executionDate" name="executionDate" value="${getFormatDate(new Date(clickeddata.executionDate))}" readonly/> <br>
         <label> Execution Status: </label> 
           <select name="execStatus" id="execStatus" value="">
             <option value="" selected disabled>${clickeddata.execStatus}</option>
@@ -344,17 +393,17 @@ $(() => {
         <label> Defect Category: </label> <input type="text" id="defectCategory" name="defectCategory" value="${clickeddata.defectCategory}"> <br>
         <label> Defect Contents: </label> <input type="text" id="defectContents" name="defectContents" value="${clickeddata.defectContents}"> <br>
         <label> Created By: </label> <input type="text" id="createdBy" name="createdBy" value="${clickeddata.createdBy}"> <br>
-        <label> Create At: </label> <input type="date" id="createAt" name="createAt" value="${clickeddata.createAt}"> <br>
+        <label> Create At: </label> <input type="date" id="createAt" name="createAt" value="${getFormatDate(new Date(clickeddata.createAt))}" readonly/> <br>
         
         <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
         <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${getFormatDate(new Date(clickeddata.defectStartDueDate))}"> <br>
+        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${getFormatDate(new Date(clickeddata.defectEndDueDate))}"> <br>
         
         <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
-        <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
+        <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${getFormatDate(new Date(clickeddata.defectDate))}" readonly/> <br>
         <br>
         <label> Defect Action Yn: </label> 
           <select id="defectActionYn" name="defectActionYn" value="">
@@ -372,9 +421,22 @@ $(() => {
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${Date(clickeddata.defectCheckDate)}"> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${getFormatDate(new Date(clickeddata.defectCheckDate))}"> <br>
         </div>
-        </form>`),
+
+        <br><hr><br>
+
+        <div id="defectAttachFileCreate"></div></form>
+        <form enctype="multipart/form-data">
+        <input type="file" id="defectAttachFileCreate2" name="files" multiple="multiple"/>
+        <input type="submit" id="Phosubmit2" value="전송"/>
+
+        <div id="defectAttachFileDelete"></div>
+        <div id="defectAttachFileGrid">
+        </div>
+        </form>
+        
+        <script src="../static/js/testDefectListPopupFileGrid.js"/>`),
       );
 
       scrollView.dxScrollView({
@@ -422,11 +484,11 @@ $(() => {
           <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
           
           <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-          <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+          <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${getFormatDate(new Date(clickeddata.defectEndDueDate))}"> <br>
           
           <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
           
-          <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
+          <label> Defect Date: </label> <input type="date" id="defectDate" name="defectDate" value="${getFormatDate(new Date(clickeddata.defectDate))}" readonly/> <br>
           <br>
           <label> Defect Action Yn: </label> 
             <select id="defectActionYn" name="defectActionYn" value="">
@@ -442,7 +504,7 @@ $(() => {
               <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${Date(clickeddata.defectCheckDate)}" readonly/> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value="${getFormatDate(new Date(clickeddata.defectCheckDate))}" readonly/> <br>
   
           </form>`),
         );
@@ -527,13 +589,13 @@ $(() => {
         <label> Defect Team: </label> <input type="text" id="defectTeam" name="defectTeam" value="${clickeddata.defectTeam}"> <br>
         <label> Defect Charger: </label> <input type="text" id="defectCharger" name="defectCharger" value="${clickeddata.defectCharger}"> <br>
         
-        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${clickeddata.defectStartDueDate}"> <br>
-        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${clickeddata.defectEndDueDate}"> <br>
+        <label> Defect Start Due Date: </label> <input type="date" id="defectStartDueDate" name="defectStartDueDate" value="${getFormatDate(new Date(clickeddata.defectStartDueDate))}"> <br>
+        <label> Defect End Due Date: </label> <input type="date" id="defectEndDueDate" name="defectEndDueDate" value="${getFormatDate(new Date(clickeddata.defectEndDueDate))}"> <br>
         
         <label> Defect Status: </label> <input type="text" id="defectStatus" name="defectStatus" value="${clickeddata.defectStatus}" readonly/> <br>
         
         <label> Defect Date: </label> 
-          <input type="date" id="defectDate" name="defectDate" value="${Date(clickeddata.defectDate)}" readonly/> <br>
+          <input type="date" id="defectDate" name="defectDate" value="${getFormatDate(new Date(clickeddata.defectDate))}" readonly/> <br>
         <br>
         <label> Defect Action Yn: </label> 
           <select id="defectActionYn" name="defectActionYn" value="">
@@ -551,7 +613,7 @@ $(() => {
                 <option value="y">y </option>
             </select><br>
           <label> Defect Check Date: </label> 
-            <input type="date" id="defectCheckDate" name="defectCheckDate" value="sysdate.toLocaleDateString();"> <br>
+            <input type="date" id="defectCheckDate" name="defectCheckDate" value=""> <br>
         </div>
         </form>`),
       );
@@ -609,6 +671,7 @@ $(() => {
         type: 'submit',
         onClick() {
           console.log("result actionYn save click");
+          console.log(new Date());
 
 
           // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
@@ -625,11 +688,9 @@ $(() => {
             'defectStartDueDate': $("#defectStartDueDate").val(),
             'defectEndDueDate': $("#defectEndDueDate").val(),
             'defectStatus': $("#defectStatus").val(),
-            'defectDate': new Data(),
+            'defectDate': new Date(),
             'defectActionYn': $("#defectActionYn").val(),
             'defectActionContents': $("#defectActionContents").val(),
-            'defectCheck': $("#defectCheck").val(),
-            'defectCheckDate': $("#defectCheckDate").val(),
           };
 
 
@@ -645,6 +706,9 @@ $(() => {
               type: 'POST',
               data: json,
               contentType: "application/json; charset=UTF-8",
+              xhrFields: {
+                withCredentials : true
+              },
               success: function(json) {
                   if (json) {
                     console.log('endend');
@@ -655,6 +719,8 @@ $(() => {
 
 
             getData();
+            clickeddata = null;
+
           // popup 창 위의 정보들을 json 형태로 POST method 연결하기
           let message = "정보를 수정했습니다!"
           DevExpress.ui.notify({
@@ -728,7 +794,7 @@ $(() => {
             'defectActionYn': $("#defectActionYn").val(),
             'defectActionContents': $("#defectActionContents").val(),
             'defectCheck': $("#defectCheckYn").val(),
-            'defectCheckDate': new Data(),
+            'defectCheckDate': new Date(),
           };
           console.log('data stringify 전: ', data);
 
@@ -744,6 +810,12 @@ $(() => {
                 dataType: 'json',
                 type: 'POST',
                 data: json,
+                processData: false,
+                cache: false,
+                crossDomain:true,
+                xhrFields: {
+                  withCredentials: true
+                },
                 contentType: "application/json; charset=UTF-8",
                 success: function(json) {
                     if (json) {
@@ -758,6 +830,7 @@ $(() => {
 
 
             getData();
+            clickeddata = null;
           // popup 창 위의 정보들을 json 형태로 POST method 연결하기
           let message = "defect check!"
           DevExpress.ui.notify({
@@ -821,7 +894,7 @@ $(() => {
             'defectCategory' : $("#defectCategory").val(),
             'defectContents' : $("#defectContents").val(),
             'createdBy' : $("createdBy").val(),
-            'createAt' : new Data(),
+            'createAt' : new Date(),
             'defectTeam' : $("#defectTeam").val(),
             'defectCharger': $("#defectCharger").val(),
             'defectStartDueDate': $("#defectStartDueDate").val(),
@@ -843,6 +916,12 @@ $(() => {
               dataType: 'json',
               type: 'POST',
               data: json,
+              processData: false,
+              cache: false,
+              crossDomain:true,
+              xhrFields: {
+                withCredentials: true
+              },
               contentType: "application/json; charset=UTF-8",
               success: function(data) {
                   if (data) {
@@ -862,6 +941,7 @@ $(() => {
           }, 'success', 3000);
 
           getData();
+          clickeddata = null;
           popup2.hide();
           // grid 에 reload 해야함
         },
@@ -935,7 +1015,16 @@ $(() => {
               dataType: 'json',
               type: 'POST',
               data: json,
+              processData: false,
+              cache: false,
+              crossDomain:true,
+              xhrFields: {
+                withCredentials: true
+              },
               contentType: "application/json; charset=UTF-8",
+              xhrFields: {
+                withCredentials : true
+              },
               success: function(json) {
                   if (json) {
                     console.log('endend');
@@ -944,6 +1033,7 @@ $(() => {
             });
             
           getData();
+          clickeddata = null;
 
           let message = "정보를 수정했습니다!"
           DevExpress.ui.notify({
@@ -1063,7 +1153,16 @@ $("#deleteButton").dxButton({
     dataType: 'json',
     type: 'DELETE',
     data: json,
+    processData: false,
+    cache: false,
+    crossDomain:true,
+    xhrFields: {
+      withCredentials: true
+    },
     contentType: "application/json; charset=UTF-8",
+    xhrFields: {
+      withCredentials : true
+    },
     success: function(json) {
         if (json) {
           console.log('endend');
@@ -1071,6 +1170,7 @@ $("#deleteButton").dxButton({
     }
   });
   getData(); 
+  clickeddata = null;
 }
 }
 });

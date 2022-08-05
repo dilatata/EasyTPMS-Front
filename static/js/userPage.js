@@ -1,7 +1,9 @@
 
 $(() => {
 
-  const url = 'http://192.168.219.103:8080';
+  const url = 'http://192.168.219.140:8080';
+  // const url = 'http://192.168.0.43:8080';
+
 
   function getData() {
     $('#gridContainer').dxDataGrid({
@@ -80,62 +82,94 @@ $(() => {
     name: 'On Button Click',
   }];
 
-  const applyFilterModeEditor = $('#useFilterApplyButton').dxSelectBox({
-    items: applyFilterTypes,
-    value: applyFilterTypes[0].key,
-    valueExpr: 'key',
-    displayExpr: 'name',
-    onValueChanged(data) {
-      dataGrid.option('filterRow.applyFilter', data.value);
-    }}).dxSelectBox('instance');
-
-  $('#filterRow').dxCheckBox({
-    text: 'Filter Row',
-    value: true,
-    onValueChanged(data) {
-      dataGrid.clearFilter();
-      dataGrid.option('filterRow.visible', data.value);
-      applyFilterModeEditor.option('disabled', !data.value);
-    },
-  });
-  
-
-  $('#headerFilter').dxCheckBox({
-    text: 'Header Filter',
-    value: true,
-    onValueChanged(data) {
-      dataGrid.clearFilter();
-      dataGrid.option('headerFilter.visible', data.value);
-    },
-  });
-
-
-  $('#file-uploader').dxFileUploader({
-      selectButtonText: 'Select excel',
-      labelText: '',
-      accept: 'excel/*',
-      uploadMode: 'useForm',
-  });
-
-  
 
   // 선택 데이터 정보 변수
   let clickeddata = null;
+  // common code use yn 변수
+  let commonCodeUseYnList = [];
+  // execution status 변수
+  let commonCodeExecutionStatusList = [];
+  // user type 변슈
+  let commonCodeUserTypeList = [];
+
+
+  // 공통코드 리스트로 받아오기
+  function commonCodeList(codeGroupId) {
+    let commonCodeList = [];
+    $.ajax({
+      url: `${url}/common/detail/${codeGroupId}`,
+      type: "GET",
+      processData: false,
+      contentType: false,
+      dataType:'json',
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function (rtn) {
+        console.log("rtn : ",rtn);
+        for(var i=0; i<rtn.length; i++){
+          commonCodeList.push({"text" : rtn[i].codeDetailDesc, "value" : rtn[i].codeDetailName});
+        };
+        console.log('success , common code list: ',commonCodeList);
+        
+        if(codeGroupId==1){
+        commonCodeUseYnList = commonCodeList;
+        console.log('codeGroupId=1');
+        } 
+        else if(codeGroupId==129){
+          commonCodeExecutionStatusList = commonCodeList;
+        console.log('codeGroupId=129');
+        }
+        else if(codeGroupId==161){
+          commonCodeUserTypeList = commonCodeList;
+          console.log('codeGroupId=161');
+        };
+      },
+      error: function (e) {
+        console.log("err:", e);
+        alert("!error happend!");
+      }
+    });
+  };
+
 
   // 하단 정보보기
   $(function() {
     $("#gridContainer").dxDataGrid({
         onRowClick(e) {
             const data = e.data;
-                if (data) {
-                  // $('.id').text(`Id : ${data.id}`);
-                  $('.userId').text(`userId : ${data.userId}`);
-                  $('.userPassword').text(`userPassword : ${data.userPassword}`);
-                  $('.userName').text(`userName : ${data.userName}`);
-                  $('.userEmail').text(`userEmail : ${data.userEmail}`);
-                  $('.roleType').text(`roleType Type : ${data.roleType}`);
-                  };
+ 
+            if (data) {
+              // $('.id').text(`Id : ${data.id}`);
+              $('.userId').text(`userId : ${data.userId}`);
+              $('.userPassword').text(`userPassword : ${data.userPassword}`);
+              $('.userName').text(`userName : ${data.userName}`);
+              $('.userEmail').text(`userEmail : ${data.userEmail}`);
+              $('.roleType').text(`roleType Type : ${data.roleType}`);
+              };
             clickeddata = data;
+            console.log("clickeddata : ", clickeddata);
+
+
+            if (commonCodeUserTypeList.length == 0){
+              commonCodeList(161) // usertype
+              console.log(commonCodeUserTypeList.length);
+              console.log('1st time common code user type list : ', commonCodeUserTypeList);
+              } else {
+              console.log('commonCodeUserTypeList already exist : ', commonCodeUserTypeList);
+      
+              popup.option({
+                contentTemplate: () => popupContentTemplate(),
+                'position.of': `#gridContainer`,
+              });
+              
+              console.log("popup 전에 길이 확인하기 : ",commonCodeUserTypeList.length); 
+              
+              popup.show();
+            };
+  
+            
         },
     })
 });
@@ -181,7 +215,7 @@ $(() => {
 
         <form id="popupForm" name="popupForm">
         <label> Id: </label> <input type="text" id="userMainId" name="userMainId" value="${clickeddata.id}" readonly/> <br>
-        <label> User Id: </label> <input type="text" id="userId" name="userId" value="${clickeddata.userId}"> <br>
+        <label> User Id: </label> <input type="text" id="userId" name="userId" value="${clickeddata.userId}" readonly/> <br>
         <label> User Password: </label> <input type="text" id="userPassword" name="userPassword" value="${clickeddata.userPassword}"> <br>
         
         <label> User Name: </label> <input type="text" id="userName" name ="userName" value="${clickeddata.userName}"> <br>
@@ -189,12 +223,32 @@ $(() => {
         
         <label> Role Type: </label> 
           <select name="roleType" id="roleType" value="${clickeddata.roleType}">
-            <option value="${clickeddata.roleType}" selected disabled>${clickeddata.roleType}</option>
-            <option value="user">user</option>
-            <option value="admin">admin</option>
           </select> <br>
         
-        </form>`),
+        </form>
+        
+        <script>
+        var commonCodeUseYn = ${JSON.stringify(commonCodeUseYnList)};
+        var commonCodeExecutionStatus =${JSON.stringify(commonCodeExecutionStatusList)};
+        var commonCodeUserTypeList =${JSON.stringify(commonCodeUserTypeList)};
+
+
+
+        function createSelectBoxAndOptions(selectId, listData){
+          var select = document.getElementById(selectId);
+          console.log("createselectboxandoptions function 에서 listdata : ", listData);
+          for(var i in listData){
+            var option = document.createElement("option");
+            option.value = listData[i].value;
+            option.text = listData[i].text;
+            select.appendChild(option);
+          }
+        };
+        createSelectBoxAndOptions('roleType', commonCodeUserTypeList);
+
+        </script>
+        
+        `),
       );
 
       scrollView.dxScrollView({
@@ -295,38 +349,34 @@ $(() => {
               };
             }
      
-            
             // 오브젝트 json 타입으로 변경
             var json = JSON.stringify(data);
 
-
-          $.ajax({
-            url: `${url}/user/edit/${clickeddata.id}`,
+            $.ajax({
+              url: `${url}/user/edit/${clickeddata.id}`,
               dataType: 'json',
               type: 'POST',
               data: json,
               contentType: "application/json; charset=UTF-8",
+              processData: false,
+              cache: false,
+              crossDomain: true,
+              xhrFields: {
+                withCredentials: true
+              },
+              onBeforeSend(method, ajaxOptions) {
+                ajaxOptions.xhrFields = { withCredentials: true };
+              },
               success: function(json) {
                   if (json) {
                     console.log('endend');
                   }
               }
             });
-              
-                    
-            // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-            let message = "정보를 수정했습니다!"
-            DevExpress.ui.notify({
-              message,
-              position: {
-                my: 'center top',
-                at: 'center top',
-              },
-            }, 'success', 3000);
-            
-            getData();
+            setTimeout(function () {
+              getData();
+            },1000); 
             popup.hide();
-            // grid 에 reload 해야함
           },
         },
       }, {
@@ -392,6 +442,15 @@ $(() => {
                 type: 'POST',
                 data: json,
                 contentType: "application/json; charset=UTF-8",
+                processData: false,
+                cache: false,
+                crossDomain: true,
+                xhrFields: {
+                  withCredentials: true
+                },
+                onBeforeSend(method, ajaxOptions) {
+                  ajaxOptions.xhrFields = { withCredentials: true };
+                },
                 success: function(json) {
                     if (json) {
                       console.log('endend');
@@ -498,6 +557,15 @@ $(() => {
         type: 'DELETE',
         data: json,
         contentType: "application/json; charset=UTF-8",
+        processData: false,
+        cache: false,
+        crossDomain: true,
+        xhrFields: {
+          withCredentials: true
+        },
+        onBeforeSend(method, ajaxOptions) {
+          ajaxOptions.xhrFields = { withCredentials: true };
+        },
         success: function(json) {
             if (json) {
               console.log('endend');

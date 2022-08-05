@@ -7,37 +7,64 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+.layerpop {
+  display: none;
+  z-index: 1000;
+  border: 2px solid #ccc;
+  background: #fff;
+  cursor: move; }
+
+  
 .sidebar {
   height: 100%;
-  width: 13%;
+  /* width: 13%; */
+  width:0;
   position: fixed;
   z-index: 1;
-  top: 20px;
-  left: 10px;
-  background: #eee;
+  /* top: 20px; */
+  top:0;
+  /* left: 10px; */
+  left: 0;
+  background: rgb(0, 0, 0);
   overflow-x: hidden;
-  padding-top: 8px;
+  transition: s;
+  /* padding-top: 8px; */
+  padding-top: 60px;
 }
 
 /* Sidebar links */
 .sidebar a {
-  padding: 6px 8px 6px 16px;
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 17px;
   color: #2196F3;
   display: block;
+  transition: s;
 }
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #04AA6D;
+  background-color: #3c5c60;
   color: white;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: white;
-  color: #064579;
+  /* background-color: white; */
+  color: #00ffe5;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
