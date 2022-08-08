@@ -1,8 +1,7 @@
 
 $(() => {
 
-  // const url = 'http://192.168.219.140:8080';
-  const url = 'http://192.168.0.43:8080';
+  const url = 'http://192.168.219.140:8080';
 
 
   function getData() {
@@ -105,18 +104,6 @@ $(() => {
   let clickeddata = null;
   var clickedDetaildata = null;
 
-  // function getDetailData() {
-  //   $('#codeDetailInfo').dxDataGrid({
-  //     dataSource: DevExpress.data.AspNet.createStore({
-  //       key: 'codeDetailId',
-  //       loadUrl: `${url}/common/detail/${clickeddata.codeGroupId}`,
-  //       onBeforeSend(method, ajaxOptions) {
-  //         ajaxOptions.xhrFields = { withCredentials: true };
-  //       },
-  //     }),
-  //   });
-  // };
-
 
   // 하단 정보보기
   $(function () {
@@ -155,35 +142,9 @@ $(() => {
           popup.show();
         }
 
-        // popup.option({
-        //   contentTemplate: () => popupContentTemplate(),
-        //   'position.of': `#gridContainer`,
-        // });
-
-        // setTimeout(function () {
-        //   console.log("popup 전에 길이 확인하기 : ", commonCodeUseYnList.length); //0 -> 이러면 안돼는데!!
-        //   popup.show();
-        // }, 1000);
-
-
-
       },
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -570,16 +531,6 @@ $(() => {
 
             }
           });
-
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-          // let message = "정보를 생성했습니다!"
-          // DevExpress.ui.notify({
-          //   message,
-          //   position: {
-          //     my: 'center top',
-          //     at: 'center top',
-          //   },
-          // }, 'success', 3000);
 
           setTimeout(function () {
             getData();

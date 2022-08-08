@@ -1,7 +1,6 @@
 
 $(() => {
 
-  // const url = 'http://192.168.219.140:8080';
   const url = 'http://192.168.0.43:8080';
 
 
@@ -31,7 +30,6 @@ $(() => {
       mode: 'single',
     },
     hoverStateEnabled: true,
-    // columnsAutoWidth: true,
     showBorders: true,
     filterRow: {
       visible: true,
@@ -111,19 +109,15 @@ $(() => {
         for(var i=0; i<rtn.length; i++){
           commonCodeList.push({"text" : rtn[i].codeDetailDesc, "value" : rtn[i].codeDetailName});
         };
-        console.log('success , common code list: ',commonCodeList);
         
         if(codeGroupId==1){
         commonCodeUseYnList = commonCodeList;
-        console.log('codeGroupId=1');
         } 
         else if(codeGroupId==129){
           commonCodeExecutionStatusList = commonCodeList;
-        console.log('codeGroupId=129');
         }
         else if(codeGroupId==161){
           commonCodeUserTypeList = commonCodeList;
-          console.log('codeGroupId=161');
         };
       },
       error: function (e) {
@@ -149,22 +143,14 @@ $(() => {
               $('.roleType').text(`roleType Type : ${data.roleType}`);
               };
             clickeddata = data;
-            console.log("clickeddata : ", clickeddata);
-
 
             if (commonCodeUserTypeList.length == 0){
               commonCodeList(161) // usertype
-              console.log(commonCodeUserTypeList.length);
-              console.log('1st time common code user type list : ', commonCodeUserTypeList);
               } else {
-              console.log('commonCodeUserTypeList already exist : ', commonCodeUserTypeList);
-      
               popup.option({
                 contentTemplate: () => popupContentTemplate(),
                 'position.of': `#gridContainer`,
               });
-              
-              console.log("popup 전에 길이 확인하기 : ",commonCodeUserTypeList.length); 
               
               popup.show();
             };
@@ -212,7 +198,6 @@ $(() => {
     const scrollView = $('<div>');
     scrollView.append(
         $(`
-
         <form id="popupForm" name="popupForm">
         <label> Id: </label> <input type="text" id="userMainId" name="userMainId" value="${clickeddata.id}" readonly/> <br>
         <label> User Id: </label> <input type="text" id="userId" name="userId" value="${clickeddata.userId}" readonly/> <br>
@@ -266,8 +251,6 @@ $(() => {
     const scrollView = $('<div>');
     scrollView.append(
       // return $('<div>').append(
-        console.log("template Log"),
-        console.log(clickeddata),
         $(`<form id="popupForm" name="popupForm">        
         <label> User Id: </label> <input type="text" id="userId" name="userId" value=""> <br>
         <label> User Password: </label> <input type="text" id="userPassword" name="userPassword" value=""> <br>
@@ -326,8 +309,6 @@ $(() => {
           type: 'submit',
           onClick() {
 
-            // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
-            // var data = $("#popupForm").serialize();
             if ($("#roleType").val() == null) {
               var roletype = `${clickeddata.roleType}`;
               var data = { 
@@ -420,8 +401,6 @@ $(() => {
           type: 'submit',
           onClick() {
 
-            // input data 값 각각 갖고와서 js 오브젝트로 만들기
-            // var data = $("#popupForm").serialize();
             var data = { 
               "userId": $("#userId").val(),
               "userPassword": $("#userPassword").val(),
@@ -470,7 +449,6 @@ $(() => {
 
             getData();
             popup2.hide();
-            // grid 에 reload 해야함
           },
         },
       }, {

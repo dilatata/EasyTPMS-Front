@@ -1,7 +1,6 @@
 $(() => {
 
-    // const url = 'http://192.168.219.140:8080';
-    const url = 'http://192.168.0.43:8080';  
+    const url = 'http://192.168.219.140:8080';
 
     let clickGroupData = null;
     let clickDetailData = null;
@@ -62,12 +61,7 @@ $(() => {
 
 
 
-////
-
-
-
     // common code detail datagrid
-    // first start code from this js file!!
     var dataGrid2 = $("#codeDetailInfo").dxDataGrid({
         dataSource: DevExpress.data.AspNet.createStore({
             key: 'codeDetailId',

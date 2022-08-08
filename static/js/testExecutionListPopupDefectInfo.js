@@ -2,15 +2,13 @@
 $(() => {
 
 
-    // const url = 'http://192.168.219.140:8080';
-    const url = 'http://192.168.0.43:8080';
+    const url = 'http://192.168.219.140:8080';
 
     // common code use yn 변수
     let clickeddata = null;
     function getloclaStorageData() {
         if (localStorage.getItem('clickedExecutionId')) {
             clickeddata = localStorage.getItem('clickedExecutionId');
-            console.log("localStorage clickedExecutionId : ", clickeddata);
         }
     };
 
@@ -50,13 +48,10 @@ $(() => {
 
     $('#popupExecutionStatus').click(function () {
         let result = $('#popupExecutionStatus').val();
-        console.log(result);
         getloclaStorageData();
         if (result == "실패") {
-            console.log("goDetail() done");
             defectInfoPopup.show();
         } else {
-            console.log('팝업닫기');
             defectInfoPopup.hide();
         }
     });
@@ -67,7 +62,6 @@ $(() => {
 
     $("#createDefect").click(function () {
         // create defect popup form
-        console.log("create defect popup Form");
         getloclaStorageData();
         defectInfoPopup.show();
     });
@@ -75,7 +69,6 @@ $(() => {
 
     $("#getDefectList").click(function () {
         // create defect List popup form
-        console.log("create defect Listpopup Form");
         getloclaStorageData();
         getDefectListPopup.show();
     });
@@ -395,12 +388,6 @@ $(() => {
                         const formData = new FormData();
                         formData.append("pic", photoFile.files[0]);
                         formData.append("key", new Blob([JSON.stringify(data)], { type: "application/json" }));
-                        // formData.append('data', [JSON.stringify(data)], { type: "application/json" });
-
-
-                        console.log("formData 확인하기 : ", formData);
-
-
 
                         $.ajax({
                             url: `${url}/execution/defect/attach-file`,
@@ -491,7 +478,6 @@ $(() => {
             mode: 'single',
         },
         hoverStateEnabled: true,
-        // columnsAutoWidth: true,
         showBorders: true,
         filterRow: {
             visible: true,
@@ -520,20 +506,16 @@ $(() => {
             },
             {
                 dataField: 'defectContents',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField: 'defectStatus',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField: 'createdBy',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField: 'createAt',
                 dataType: 'date',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField: 'defectTeam',
@@ -541,7 +523,6 @@ $(() => {
             },
             {
                 dataField: 'defectCharger',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField: 'defectStartDueDate',

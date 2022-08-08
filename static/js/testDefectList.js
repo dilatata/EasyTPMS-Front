@@ -170,20 +170,16 @@ $(() => {
       },
       {
           dataField:'defectContents',
-          // validationRules: [{ type: 'required' }],
       },
       {
           dataField:'defectStatus',
-          // validationRules: [{ type: 'required' }],
       },
       {
           dataField:'createdBy',
-          // validationRules: [{ type: 'required' }],
       },
       {
           dataField:'createAt',
           dataType: 'date',
-          // validationRules: [{ type: 'required' }],
       },
       {
           dataField:'defectTeam',
@@ -191,7 +187,6 @@ $(() => {
       },
       {
           dataField:'defectCharger',
-          // validationRules: [{ type: 'required' }],
       },
       {
           dataField:'defectStartDueDate',
@@ -247,8 +242,6 @@ $(() => {
 
   // 공통코드 리스트로 받아오기
   function useYnList(codeGroupId) {
-    // 이렇게 바로 code 넣어도 되는건가..?
-    // var codeGroupId = 1;
 
     let commonCodeList = [];
     $.ajax({
@@ -263,13 +256,9 @@ $(() => {
       },
       success: function (rtn) {
         console.log("rtn : ",rtn);
-        // alert("공통코드 정보 : " + rtn[0].codeDetailDesc);
         for(var i=0; i<rtn.length; i++){
           commonCodeList.push({"text" : rtn[i].codeDetailDesc, "value" : rtn[i].codeDetailName});
         };
-        // commonCodeUseYnList = [{'text' : rtn[0].codeDetailDesc, 'value' : rtn[0].codeDetailName},{'text': rtn[0].codeDetailDesc , 'value': rtn[1].codeDetailName}];
-        console.log('success , common code list: ',commonCodeList);
-        // commonCodeUseYnList = JSON.stringify(commonCodeList);
         commonCodeUseYnList = commonCodeList;
       },
       error: function (e) {
@@ -288,26 +277,15 @@ $(() => {
             localStorage.setItem("clickedDefectId", clickeddata.defectId);
             localStorage.setItem("defectOnRowclick", JSON.stringify(clickeddata));
 
-            console.log("clickeddata",clickeddata);
-
         if (commonCodeUseYnList.length == 0){
         useYnList(1);
-        console.log(commonCodeUseYnList.length);
-        console.log('1st time common code use yn list : ', commonCodeUseYnList);
-
-        
 
         } else {
-        console.log('commonCodeUseYnList already exist : ', commonCodeUseYnList);
-
         popup.option({
           contentTemplate: () => popupContentTemplate(),
           'position.of': `#gridContainer`,
         });
         
-
-        console.log("popup 전에 길이 확인하기 : ",commonCodeUseYnList.length); //0 -> 이러면 안돼는데!!
-
         popup.show();
         }
 
@@ -321,7 +299,6 @@ $(() => {
                   $('.testScenarioName').text(`Test Scenario Name : ${data.testScenarioName}`);
                   $('.testCaseId').text(`Test Case Id : ${data.testCaseId}`);
                   $('.testCaseName').text(`Test Case Name : ${data.testCaseName}`);
-                  console.log( '찍어보기', data.createAt, new Date(data.createAt));
                   $('.defectId').text(`defectId : ${data.defectId}`);
                   $('.defectCategory').text(`defectCategory : ${data.defectCategory}`);
                   $('.defectContents').text(`defectContents : ${data.defectContents}`);
@@ -337,7 +314,6 @@ $(() => {
                   $('.defectActionContents').text(`defectActionContents : ${data.defectActionContents}`);
                   $('.defectCheck').text(`defectCheck : ${data.defectCheck}`);
                   $('.defectCheckDate').text(`defectCheckDate : ${getFormatDate(new Date(data.defectCheckDate))}`);
-
                   $('.executionDate').text(`Execution Date : ${getFormatDate(new Date(data.executionDate))}`);
                   $('.execStatus').text(`Execution Status : ${data.execStatus}`);
                   $('.execResult').text(`Execution Result : ${data.execResult}`);
@@ -670,12 +646,6 @@ function createSelectBoxAndOptions(selectId, listData){
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("result actionYn save click");
-          console.log(new Date());
-
-
-          // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
-          // var data = $("#popupForm").serialize();
           var data = { 
             'executionId' : $("#executionId").val(),
             'defectId' : $("#defectId").val(),
@@ -692,7 +662,6 @@ function createSelectBoxAndOptions(selectId, listData){
             'defectActionYn': $("#defectActionYn").val(),
             'defectActionContents': $("#defectActionContents").val(),
           };
-
 
 
           // 오브젝트 json 타입으로 변경
@@ -732,7 +701,6 @@ function createSelectBoxAndOptions(selectId, listData){
           }, 'success', 3000);
           
           popup.hide();
-          // grid 에 reload 해야함
         },
       },
     }, {
@@ -774,9 +742,6 @@ function createSelectBoxAndOptions(selectId, listData){
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("defect check save click");
-
-
           // var data = $("#popupForm").serialize();
           var data = { 
             'executionId' : $("#executionId").val(),
@@ -796,13 +761,9 @@ function createSelectBoxAndOptions(selectId, listData){
             'defectCheck': $("#defectCheckYn").val(),
             'defectCheckDate': new Date(),
           };
-          console.log('data stringify 전: ', data);
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
-
-          console.log(json);
-          
 
           if (`${clickeddata.defectActionYn}` =='y' && $("#defectCheckYn").val() != null) {
             $.ajax({
@@ -828,7 +789,6 @@ function createSelectBoxAndOptions(selectId, listData){
             
             }
 
-
             getData();
             clickeddata = null;
           // popup 창 위의 정보들을 json 형태로 POST method 연결하기
@@ -842,7 +802,6 @@ function createSelectBoxAndOptions(selectId, listData){
           }, 'success', 3000);
           
           popup4.hide();
-          // grid 에 reload 해야함
         },
       },
     }, {
@@ -885,9 +844,6 @@ function createSelectBoxAndOptions(selectId, listData){
         text: 'Create',
         type: 'submit',
         onClick() {
-          console.log("create click");
-
-          // var data = $("#popupForm").serialize();
           var data = { 
             'executionId' : $("#executionId").val(),
             'defectId' : $("#defectId").val(),
@@ -930,20 +886,9 @@ function createSelectBoxAndOptions(selectId, listData){
               }
             }); 
 
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-          let message = "정보를 생성했습니다!"
-          DevExpress.ui.notify({
-            message,
-            position: {
-              my: 'center top',
-              at: 'center top',
-            },
-          }, 'success', 3000);
-
           getData();
           clickeddata = null;
           popup2.hide();
-          // grid 에 reload 해야함
         },
       },
     }, {
@@ -985,9 +930,6 @@ function createSelectBoxAndOptions(selectId, listData){
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("edit popup save click");
-
-          // var data = $("#popupForm").serialize();
           var data = { 
             'executionId' : $("#executionId").val(),
             'defectId' : $("#defectId").val(),
@@ -1034,18 +976,7 @@ function createSelectBoxAndOptions(selectId, listData){
             
           getData();
           clickeddata = null;
-
-          let message = "정보를 수정했습니다!"
-          DevExpress.ui.notify({
-            message,
-            position: {
-              my: 'center top',
-              at: 'center top',
-            },
-          }, 'success', 3000);
-
           popup3.hide();
-          // grid 에 reload 해야함
         },
       },
     }, {
@@ -1137,15 +1068,12 @@ $("#createInfo").dxButton({
 $("#deleteButton").dxButton({
   text: 'Delete Button',
   onClick: function() {
-  //원래 동작해야 할 이벤트를 중지 시킨다.  
   if(clickeddata){
 
-  //유저가 입력한 정보를 js 오브젝트로 만든다.  
   var data = {
     'defectId' : clickeddata.defectId
   };
 
-  //위에서 만든 오브젝트를 json 타입으로 바꾼다.
   var json = JSON.stringify(data);
 
   $.ajax({

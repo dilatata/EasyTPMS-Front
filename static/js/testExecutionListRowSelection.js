@@ -1,7 +1,6 @@
 $(() => {
 
-  // const url = 'http://192.168.219.140:8080';
-  const url = 'http://192.168.0.43:8080';
+  const url = 'http://192.168.219.140:8080';
 
 
   function getData() {
@@ -39,7 +38,6 @@ $(() => {
       mode: 'single',
     },
     hoverStateEnabled: true,
-    // columnsAutoWidth: true,
     showBorders: true,
     filterRow: {
       visible: true,
@@ -113,13 +111,7 @@ $(() => {
       {
         id: "execStatusId",
         dataField: 'execStatus',
-        // validationRules: [{ type: 'required' }],
         width: 125,
-        // lookup: {
-        //   dataSource: yn,
-        //   displayExpr: 'value',
-        //   valueExpr: 'id',
-        // },
       },
       {
         dataField: 'execDueDate',
@@ -128,7 +120,6 @@ $(() => {
       },
       {
         dataField: 'projectName',
-        // visible: false,
       },
       {
         dataField: 'testTargetType',
@@ -207,18 +198,14 @@ $(() => {
         withCredentials: true
       },
       success: function (rtn) {
-        console.log("rtn : ",rtn);
         for(var i=0; i<rtn.length; i++){
           commonCodeList.push({"text" : rtn[i].codeDetailDesc, "value" : rtn[i].codeDetailName});
         };
-        console.log('success , common code list: ',commonCodeList);
         if(codeGroupId==1){
         commonCodeUseYnList = commonCodeList;
-        console.log('codeGroupId=1');
         } 
         else if(codeGroupId==2){
           commonCodeExecutionStatusList = commonCodeList;
-        console.log('codeGroupId=2');
         };
       },
       error: function (e) {
@@ -235,40 +222,20 @@ $(() => {
         let data = e.data;
         // console.log(data);
         clickeddata = data;
-        console.log("clickeddata",clickeddata);
         localStorage.setItem("clickedExecutionId", clickeddata.executionId);
 
         if (commonCodeUseYnList.length == 0 && commonCodeExecutionStatusList.length == 0){
         commonCodeList(2); // executionStatus
         commonCodeList(1); // yn
-        console.log(commonCodeUseYnList.length);
-        console.log(commonCodeExecutionStatusList.length);
-        console.log('1st time common code use yn list : ', commonCodeUseYnList, commonCodeExecutionStatusList);
         } else {
-        console.log('commonCodeUseYnList already exist : ', commonCodeUseYnList, commonCodeExecutionStatusList);
-
         popup.option({
           contentTemplate: () => popupContentTemplate(),
           'position.of': `#gridContainer`,
         });
         
-
-        console.log("popup 전에 길이 확인하기 : ",commonCodeUseYnList.length, commonCodeExecutionStatusList.length); 
-
         popup.show();
         }
-
-        // popup.option({
-        //   contentTemplate: () => popupContentTemplate(),
-        //   'position.of': `#gridContainer`,
-        // });
-
-        // setTimeout(function () {
-        //   console.log("popup 전에 길이 확인하기 : ",commonCodeUseYnList.length); //0 -> 이러면 안돼는데!!
-        //   popup.show();
-        // }, 1000);
         
-
         if (data) {
           $('.executionId').text(`Execution Id : ${data.executionId}`);
           $('.projectName').text(`Project Name : ${data.projectName}`);
@@ -302,32 +269,6 @@ $(() => {
     })
   });
 
-
-  //   $(function () {
-  //   $("#gridContainer").dxDataGrid({
-  //     onRowClick(e) {
-  //       clickeddata = e.data;
-  //       console.log(clickeddata);
-  //       console.log("POPUP DETAIL");
-  //       if (clickeddata){
-        
-        
-  //       $('.executionId').text(`Execution Id : ${clickeddata.executionId}`);
-  //       $('.projectName').text(`Project Name : ${clickeddata.projectName}`);
-
-  //       // detailPopup.show();
-  //       }      
-  //      }
-//      })
-
-
-
-  
-  
-
-    /**
-   * select -> option 자동으로 만들기
-   */
   function createSelectBoxAndOptions(selectId, listData){
     var select = document.getElementById(selectId);
     for(var i in listData){
@@ -494,8 +435,6 @@ $(() => {
     const scrollView = $('<div>');
     scrollView.append(
       // return $('<div>').append(
-      console.log("template Log"),
-      console.log(clickeddata),
       $(`<form id="popupForm" name="popupForm">`),
       $(`<label> Execution Id: </label> <input type="text" id="popupExecutionId" name="executionId" value="" readonly/> <br> `),
       $(`<label> Project Name: </label> <input type="text" id="popupProjectName" name ="popupProjectName"value=""> <br>`),
@@ -661,14 +600,7 @@ $(() => {
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("save click");
 
-
-          // SERIALIZE() 사용하면 편하겠지만 계속 공(NULL 아닌 빈) DATA 값만 넘어감
-          // var data = $("#popupForm").serialize();
-          // console.log("popupForm data: ",data);
-
-          // input data 값 각각 갖고와서 js 오브젝트로 만들기
           var data = {
             'executionId': $("#popupExecutionId").val(),
             'projectName': $("#popupProjectName").val(),
@@ -720,43 +652,10 @@ $(() => {
 
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
-          console.log("확인", json);
 
-
-          if ($("#popupExecutionStatus").val() == '실패') {
-            console.log("조건문 확인 완료");
-          } else {
-            console.log("조건문 실패 아님");
-          };
-
-          // if ($("#popupExecutionStatus").val() == '실패') {
-          //   //Ajax POST Method TEST -> result 실패 입력
-          //   $.ajax({
-          //     url: `${url}/execution/defect`,
-          //     dataType: 'json',
-          //     type: 'POST',
-          //     data: json,
-          //     contentType: "application/json; charset=UTF-8",
-          //     processData: false,
-          //     cache: false,
-          //     crossDomain: true,
-          //     xhrFields: {
-          //       withCredentials: true
-          //     },
-          //     onBeforeSend(method, ajaxOptions) {
-          //       ajaxOptions.xhrFields = { withCredentials: true };
-          //     },
-          //     success: function (json) {
-          //       if (json) {
-          //         console.log('endend');
-          //       }
-          //     }
-          //   });
-          //   console.log("execution/defect 실행");
-
-          // } else {
-          //   //Ajax POST Method TEST -> result 성공 입력
-            console.log('상태 성공');
+          if ($("#popupExecutionStatus").val() != '실패') {
+          
+          //Ajax POST Method TEST -> result 성공 입력
             $.ajax({
               url: `${url}/execution/result/${clickeddata.executionId}`,
               dataType: 'json',
@@ -778,19 +677,7 @@ $(() => {
                 }
               }
             });
-            console.log("execution/result 실행");
-
-          // };
-
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-          let message = "정보를 수정했습니다!"
-          DevExpress.ui.notify({
-            message,
-            position: {
-              my: 'center top',
-              at: 'center top',
-            },
-          }, 'success', 3000);
+          };
 
           getData();
 
@@ -838,9 +725,7 @@ $(() => {
         text: 'Create',
         type: 'submit',
         onClick() {
-          console.log("create click");
 
-          // input data 값 각각 갖고와서 js 오브젝트로 만들기
           var data = {
             'executionId': $("#popupExecutionId").val(),
             'projectName': $("#popupProjectName").val(),
@@ -874,8 +759,6 @@ $(() => {
           // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
 
-          console.log("확인", json);
-
           //Ajax POST Method TEST -> new execution create
           $.ajax({
             url: `${url}/execution/create`,
@@ -902,17 +785,6 @@ $(() => {
           setTimeout(function () {
             getData();
           }, 1000);
-
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-          let message = "정보를 생성했습니다!"
-          DevExpress.ui.notify({
-            message,
-            position: {
-              my: 'center top',
-              at: 'center top',
-            },
-          }, 'success', 3000);
-
 
           popup2.hide();
         },
@@ -954,12 +826,7 @@ $(() => {
         text: 'Save',
         type: 'submit',
         onClick() {
-          console.log("save click");
 
-
-
-
-          // input data 값 각각 갖고와서 js 오브젝트로 만들기
           var data = {
             'executionId': $("#popupExecutionId").val(),
             'projectName': $("#popupProjectName").val(),
@@ -990,12 +857,7 @@ $(() => {
             'execResult': $("#popupExecutionResult").val(),
           };
 
-
-          // 오브젝트 json 타입으로 변경
           var json = JSON.stringify(data);
-
-
-          console.log("확인", json);
 
           //Ajax POST Method TEST -> 일반 수정
           $.ajax({
@@ -1016,16 +878,7 @@ $(() => {
               }
             }
           });
-          // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-          let message = "정보를 수정했습니다!"
-          DevExpress.ui.notify({
-            message,
-            position: {
-              my: 'center top',
-              at: 'center top',
-            },
-          }, 'success', 3000);
-
+         
           getData();
 
           popup3.hide();
@@ -1106,15 +959,12 @@ $(() => {
   $("#deleteButton").dxButton({
     text: 'Delete Button',
     onClick: function () {
-      //원래 동작해야 할 이벤트를 중지 시킨다.  
       if (clickeddata) {
 
-        //유저가 입력한 정보를 js 오브젝트로 만든다.  
         var data = {
           'executionId': clickeddata.executionId
         };
 
-        //위에서 만든 오브젝트를 json 타입으로 바꾼다.
         var json = JSON.stringify(data);
 
         $.ajax({
@@ -1146,7 +996,6 @@ $(() => {
 
   //photo exemple
   const fileInput = document.getElementById("fileUpload");
-  // 또는 const fileInput = $("#fileUpload").get(0);
   let regex = new RegExp("(.*?)\.(jpg|png)$");
 	let maxSize = 1048576; //1MB	
   
@@ -1165,29 +1014,6 @@ $(() => {
 		return true;		
 		
 	}
-
-
-  // pic 파일 존재여부 확인하기
-  // fileInput.onchange = () => {
-  //   const selectedFile = fileInput.files[0];
-  //   console.log(selectedFile);
-  //   console.log(selectedFile.name);
-  //   console.log(selectedFile.size);
-
-  //   let formData = new FormData();
-  //   formData.append("pic", selectedFile);
-  //   console.log(formData);
-  //   console.log(formData.pic);
-
-    
-
-  // if(!fileCheck(selectedFile.name, selectedFile.size)){
-  //   return false;
-  // }
-  // alert("file 존재함 , 통과");
-  // };
-
-
 
   $("#Phosubmit").click(
     function() {
@@ -1227,14 +1053,9 @@ $(() => {
   // excel upload
   $("#excelUpload").click(
     function (event) {
-      console.log("받아온 값 확인하기", $("#excelInput")[0]);
 
-      //원래 동작해야 할 이벤트를 중지 시킨다.  
       event.preventDefault();
       let excelInput = $("#excelInput")[0];
-
-      // 파일을 여러개 선택할 수 있으므로 files 라는 객체에 담긴다.
-      console.log("excelInput : ", excelInput.files);
 
       if (excelInput.files.length === 0) {
         alert("파일은 선택해주세요");
@@ -1243,8 +1064,6 @@ $(() => {
 
       const formData = new FormData();
       formData.append("file", excelInput.files[0]);
-      console.log("$('#uploadForm')[0] : ", $('#uploadForm')[0]);
-      console.log(formData);
 
       $.ajax({
         enctype: 'multipart/form-data',
@@ -1267,9 +1086,7 @@ $(() => {
         }
       });
 
-      // input 내용 비우기
       $("#excelInput").val("");
-      //저장하는 시간이 필요하므로 2초 지연
       setTimeout(function () {
         getData();
       }, 2000);
@@ -1311,9 +1128,6 @@ $(() => {
           alert("error!")
         }
       });
-
-      // api 통하지 않고 고정된 엑셀 서식 이렇게도 할 수 있다는데 나는 모르겠다~
-      // document.location.replace = "../static/execeltemplate/uploadExcelTemplate.xlsx"
     }
   });
 

@@ -1,15 +1,13 @@
 $(() => {
 
 
-    // const url = 'http://192.168.219.140:8080';
-    const url = 'http://192.168.0.43:8080';
+    const url = 'http://192.168.219.140:8080';
     
     // common code use yn 변수
     let clickeddata = null;
     function getloclaStorageData() {
     if(localStorage.getItem('clickedExecutionId')){
         clickeddata =localStorage.getItem('clickedExecutionId');
-        console.log("localStorage clickedExecutionId : ", clickeddata);
        }
     };
 
@@ -30,7 +28,6 @@ $(() => {
             mode: 'single',
         },
         hoverStateEnabled: true,
-            // columnsAutoWidth: true,
         showBorders: true,
         filterRow: {
             visible: true,
@@ -59,20 +56,16 @@ $(() => {
             },
             {
                 dataField:'defectContents',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField:'defectStatus',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField:'createdBy',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField:'createAt',
                 dataType: 'date',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField:'defectTeam',
@@ -80,7 +73,6 @@ $(() => {
             },
             {
                 dataField:'defectCharger',
-                // validationRules: [{ type: 'required' }],
             },
             {
                 dataField:'defectStartDueDate',
