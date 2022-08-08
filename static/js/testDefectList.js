@@ -1,7 +1,7 @@
 $(() => {
 
-  const url = 'http://192.168.219.140:8080';
-  // const url = 'http://192.168.0.43:8080';
+  // const url = 'http://192.168.219.140:8080';
+  const url = 'http://192.168.0.43:8080';
 
   function getData() {
     $('#gridContainer').dxDataGrid({

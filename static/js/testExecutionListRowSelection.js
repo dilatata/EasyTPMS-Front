@@ -1,7 +1,7 @@
 $(() => {
 
-  const url = 'http://192.168.219.140:8080';
-  // const url = 'http://192.168.0.43:8080';
+  // const url = 'http://192.168.219.140:8080';
+  const url = 'http://192.168.0.43:8080';
 
 
   function getData() {
@@ -216,9 +216,9 @@ $(() => {
         commonCodeUseYnList = commonCodeList;
         console.log('codeGroupId=1');
         } 
-        else if(codeGroupId==129){
+        else if(codeGroupId==2){
           commonCodeExecutionStatusList = commonCodeList;
-        console.log('codeGroupId=129');
+        console.log('codeGroupId=2');
         };
       },
       error: function (e) {
@@ -239,7 +239,7 @@ $(() => {
         localStorage.setItem("clickedExecutionId", clickeddata.executionId);
 
         if (commonCodeUseYnList.length == 0 && commonCodeExecutionStatusList.length == 0){
-        commonCodeList(129); // executionStatus
+        commonCodeList(2); // executionStatus
         commonCodeList(1); // yn
         console.log(commonCodeUseYnList.length);
         console.log(commonCodeExecutionStatusList.length);
@@ -1046,129 +1046,6 @@ $(() => {
   }).dxPopup('instance');
 
 
-  // defect popup
-  // const defectPopup2 = $("#").dxPopup({
-  //   contentTemplate: popupContentTemplate2,
-  //   width: 500,
-  //   height: 500,
-  //   container: '.dx-viewport',
-  //   showTitle: true,
-  //   title: 'Information',
-  //   dragEnabled: false,
-  //   hideOnOutsideClick: false,
-  //   showCloseButton: true,
-  //   position: {
-  //     at: 'center',
-  //     my: 'center',
-  //   },
-  //   toolbarItems: [{
-  //     widget: 'dxButton',
-  //     toolbar: 'bottom',
-  //     location: 'before',
-  //     options: {
-  //       text: 'Create',
-  //       type: 'submit',
-  //       onClick() {
-  //         console.log("create click");
-
-  //         // input data 값 각각 갖고와서 js 오브젝트로 만들기
-  //         var data = {
-  //           'executionId': $("#popupExecutionId").val(),
-  //           'projectName': $("#popupProjectName").val(),
-  //           'testType': $("#popupTestType").val(),
-  //           'testTargetType': $("#popupTestTargetType").val(),
-  //           'testTargetName': $("#popupTestTargetName").val(),
-  //           'scenarioType': $("#popupScenarioType").val(),
-  //           'scenarioCategory': $("#popupScenarioCategory").val(),
-  //           'bizCategory': $("#popupBizCategory").val(),
-  //           'bizDetail': $("#popupBizDetail").val(),
-  //           'version': $("#popupVersion").val(),
-  //           'teamName': $("#popupTeamName").val(),
-  //           'testScenarioId': $("#popupTestScenarioId").val(),
-  //           'testScenarioName': $("#popupTestScenarioName").val(),
-  //           'screenId': $("#popupScreenId").val(),
-  //           'screenName': $("#popupScreenName").val(),
-  //           'testCaseId': $("#popupTestCaseId").val(),
-  //           'testCaseName': $("#popupTestCaseName").val(),
-  //           'tester': $("#popupTester").val(),
-  //           'confirmContents': $("#popupConfirmContents").val(),
-  //           'testData': $("#popupTestData").val(),
-  //           'buildName': $("#popupBuildName").val(),
-  //           'buildVersion': $("#popupBuildVersion").val(),
-  //           'note': $("#popupNote").val(),
-  //           'execDueDate': $("#popupExecutionDueDate").val(),
-  //           'executionDate': $("#popupExecutionDate").val(),
-  //           'execStatus': $("#popupExecutionStatus").val(),
-  //           'execResult': $("#popupExecutionResult").val(),
-  //         };
-
-  //         // 오브젝트 json 타입으로 변경
-  //         var json = JSON.stringify(data);
-
-  //         console.log("확인", json);
-
-  //         //Ajax POST Method TEST -> new execution create
-  //         $.ajax({
-  //           url: `${url}/execution/create`,
-  //           dataType: 'json',
-  //           type: 'POST',
-  //           data: json,
-  //           contentType: "application/json; charset=UTF-8",
-  //           processData: false,
-  //           cache: false,
-  //           crossDomain:true,
-  //           xhrFields: {
-  //             withCredentials: true
-  //           },
-  //           onBeforeSend(method, ajaxOptions) {
-  //             ajaxOptions.xhrFields = { withCredentials: true };
-  //           },
-  //           success: function (json) {
-  //             if (json) {
-  //               console.log('endend');
-  //             }
-  //           }
-  //         });
-
-  //         setTimeout(function () {
-  //           getData();
-  //         }, 1000);
-
-  //         // popup 창 위의 정보들을 json 형태로 POST method 연결하기
-  //         let message = "정보를 생성했습니다!"
-  //         DevExpress.ui.notify({
-  //           message,
-  //           position: {
-  //             my: 'center top',
-  //             at: 'center top',
-  //           },
-  //         }, 'success', 3000);
-
-
-  //         popup2.hide();
-  //       },
-  //     },
-  //   }, {
-  //     widget: 'dxButton',
-  //     toolbar: 'bottom',
-  //     location: 'after',
-  //     options: {
-  //       text: 'Close',
-  //       onClick() {
-  //         popup2.hide();
-  //       },
-  //     },
-  //   }],
-  // }).dxPopup('instance');
-
-
-
-
-
-
-
-
-  //
   
 
 

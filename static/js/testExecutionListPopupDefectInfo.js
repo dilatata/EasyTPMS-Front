@@ -2,8 +2,8 @@
 $(() => {
 
 
-    const url = 'http://192.168.219.140:8080';
-    // const url = 'http://192.168.0.43:8080';
+    // const url = 'http://192.168.219.140:8080';
+    const url = 'http://192.168.0.43:8080';
     
     // common code use yn 변수
     let clickeddata = null;
@@ -88,7 +88,7 @@ $(() => {
         const scrollView2 = $('<div>');
         scrollView2.append(
         $(`          
-        <form>
+        <form id="newdefectForm" method="post" enctype="multipart/form-data">
         <div id="defectTemplate">
         <h1> this is defect create form </h1>
 
@@ -128,16 +128,16 @@ $(() => {
         <label> Defect Check Date: </label> <input type="date" id ="popupDefectCheckDate" name="popupDefectCheckDate" placehold="" value="" readonly/> <br>
         </div>
 
-        <div id="attachFIle" style="display:block">
+        <div id="attachFile" style="display:block">
         <h2>this is for Attach file!</h2>
-        <form method="post" enctype="multipart/form-data">
+        
         <div class="button">
             <label for="chooseFile">
                 👉 CLICK HERE! 👈
             </label>
         </div>
-        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-        </form>
+        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" >
+
         </div>
 
         </div>
@@ -185,64 +185,69 @@ $(() => {
             console.log("new defect popup save click");
 
             var data = {
-                'executionId': $("#popupExecutionId").val(),
-                'projectName': $("#popupProjectName").val(),
-                'testType': $("#popupTestType").val(),
-                'testTargetType': $("#popupTestTargetType").val(),
-                'testTargetName': $("#popupTestTargetName").val(),
-                'scenarioType': $("#popupScenarioType").val(),
-                'scenarioCategory': $("#popupScenarioCategory").val(),
-                'bizCategory': $("#popupBizCategory").val(),
-                'bizDetail': $("#popupBizDetail").val(),
-                'version': $("#popupVersion").val(),
-                'teamName': $("#popupTeamName").val(),
-                'testScenarioId': $("#popupTestScenarioId").val(),
-                'testScenarioName': $("#popupTestScenarioName").val(),
-                'screenId': $("#popupScreenId").val(),
-                'screenName': $("#popupScreenName").val(),
-                'testCaseId': $("#popupTestCaseId").val(),
-                'testCaseName': $("#popupTestCaseName").val(),
-                'tester': $("#popupTester").val(),
-                'confirmContents': $("#popupConfirmContents").val(),
-                'testData': $("#popupTestData").val(),
-                'buildName': $("#popupBuildName").val(),
-                'buildVersion': $("#popupBuildVersion").val(),
-                'note': $("#popupNote").val(),
-                'execDueDate': getFormatDate(new Date()),
-                'executionDate': $("#popupExecutionDate").val(),
-                'executionDate': new Date(),
-                'execStatus': $("#popupExecutionStatus").val(),
-                'execResult': $("#popupExecutionResult").val(),
-                'testDefectList': [
+                executionId: $("#popupExecutionId").val(),
+                projectName: $("#popupProjectName").val(),
+                testType: $("#popupTestType").val(),
+                testTargetType: $("#popupTestTargetType").val(),
+                testTargetName: $("#popupTestTargetName").val(),
+                scenarioType: $("#popupScenarioType").val(),
+                scenarioCategory: $("#popupScenarioCategory").val(),
+                bizCategory: $("#popupBizCategory").val(),
+                bizDetail: $("#popupBizDetail").val(),
+                version: $("#popupVersion").val(),
+                teamName: $("#popupTeamName").val(),
+                testScenarioId: $("#popupTestScenarioId").val(),
+                testScenarioName: $("#popupTestScenarioName").val(),
+                screenId: $("#popupScreenId").val(),
+                screenName: $("#popupScreenName").val(),
+                testCaseId: $("#popupTestCaseId").val(),
+                testCaseName: $("#popupTestCaseName").val(),
+                tester: $("#popupTester").val(),
+                confirmContents: $("#popupConfirmContents").val(),
+                testData: $("#popupTestData").val(),
+                buildName: $("#popupBuildName").val(),
+                buildVersion: $("#popupBuildVersion").val(),
+                note: $("#popupNote").val(),
+                execDueDate: getFormatDate(new Date()),
+                executionDate: $("#popupExecutionDate").val(),
+                executionDate: new Date(),
+                execStatus: $("#popupExecutionStatus").val(),
+                execResult: $("#popupExecutionResult").val(),
+                testDefectList: [
                 {
-                    "createAt": new Date(),
-                    "createdBy": $("#popupCreatedBy").val(), // session username 넣기
-                    "defectActionContents": $("#popupDefectActionContents").val(),
-                    "defectActionYn": $("#popupDefectActionYn").val(),
-                    "defectCategory": $("#popupDefectCategory").val(),
-                    "defectCharger": $("#popupDefectCharger").val(),
-                    "defectCheck": $("#popupDefectCheck").val(),
-                    "defectCheckDate": $("#popupDefectCheckDate").val(),
-                    "defectContents": $("#popupDefectContents2").val(),
-                    "defectDate": $("#popupDefectDate").val(),
-                    "defectEndDueDate": $("#popupDefectEndDueDate").val(),
-                    "defectStartDueDate": $("#popupDefectStartDueDate").val(),
-                    "defectStatus": $("#popupDefectStatus").val(),
-                    "defectTeam": $("#popupDefectTeam").val(),
-                    "executionId": $("#popupExecutionId").val(),
+                    createAt: new Date(),
+                    createdBy: $("#popupCreatedBy").val(), // session username 넣기
+                    defectActionContents: $("#popupDefectActionContents").val(),
+                    defectActionYn: $("#popupDefectActionYn").val(),
+                    defectCategory: $("#popupDefectCategory").val(),
+                    defectCharger: $("#popupDefectCharger").val(),
+                    defectCheck: $("#popupDefectCheck").val(),
+                    defectCheckDate: $("#popupDefectCheckDate").val(),
+                    defectContents: $("#popupDefectContents2").val(),
+                    defectDate: $("#popupDefectDate").val(),
+                    defectEndDueDate: $("#popupDefectEndDueDate").val(),
+                    defectStartDueDate: $("#popupDefectStartDueDate").val(),
+                    defectStatus: $("#popupDefectStatus").val(),
+                    defectTeam: $("#popupDefectTeam").val(),
+                    executionId : $("#popupExecutionId").val(),
                 }
-                ],
+                ]
             };
 
             // 오브젝트 json 타입으로 변경
-            var json = JSON.stringify(data);
-            console.log("확인", json);
+            // var json = JSON.stringify(data);
+            // console.log("확인", json);
 
+
+
+
+
+            if($('#chooseFile').val().length == 0){
             $.ajax({
                 url: `${url}/execution/defect`,
                 dataType: 'json',
                 type: 'POST',
-                data: json,
+                data: JSON.stringify(data),
                 contentType: "application/json; charset=UTF-8",
                 processData: false,
                 cache: false,
@@ -257,41 +262,81 @@ $(() => {
                 if (json) {
                     console.log('endend');
                 }
-                }
-            });
-            console.log("execution/defect 실행");
-
-            // 첨부파일 ajax
-            if( $('#chooseFile').val() != null){
-                const photoFile = document.getElementById("chooseFile");
-
-                const formData = new FormData();
-                formData.append("pic", photoFile.files[0]);
-                console.log(photoFile.files[0]);
-                console.log(formData);
-        
-                $.ajax({
-                url: `${url}/defect/attachFile/create`,
-                type: "POST",
-                processData: false,
-                contentType: false,
-                data: formData,
-                dataType:'json',
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (rtn) {
-                    alert("upload success");
                 },
                 error: function (e) {
                     console.log("err:", e);
                     alert("please check your image");
                     // getData();
                 }
-                });
-            }
+            });
+            console.log("execution/defect 실행");
+        };
 
+            // 첨부파일 ajax
+
+            if( $('#chooseFile').val().length > 0){
+                const photoFile = document.getElementById("chooseFile");
+
+                var form =$('#form')[0];
+                const formData = new FormData(form);
+                formData.append('pic', photoFile.files[0]);
+                // console.log(photoFile.files[0]);
+                // console.log(formData);
+        
+                // $.ajax({
+                // url: `${url}/defect/attachFile/create`,
+                // type: "POST",
+                // processData: false,
+                // contentType: false,
+                // data: formData,
+                // dataType:'json',
+                // crossDomain: true,
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                // success: function (rtn) {
+                //     alert("upload success");
+                // },
+                // error: function (e) {
+                //     console.log("err:", e);
+                //     alert("please check your image");
+                //     // getData();
+                // }
+                // });
+
+
+                
+            formData.append('key', new Blob([JSON.stringify(data)],{type: "application/json"}));
+
+            formData.append('data', JSON.stringify(data));
+            console.log("formData 확인하기 : ", formData);
+
+
+
+                $.ajax({
+                    url: `${url}/execution/defect/attach-file`,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache : false,
+                    data: formData,
+                    dataType:'json',
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function (rtn) {
+                        alert("upload success");
+                    },
+                    error: function (e) {
+                        console.log("err:", e);
+                        alert("please check your image");
+                        // getData();
+                    }
+                    });
+            };
+
+            defectInfoPopup.hide();
             }
         }
         },
@@ -354,14 +399,15 @@ $(() => {
             };
 
             // 오브젝트 json 타입으로 변경
-            var json = JSON.stringify(data);
-            console.log("확인", json);
+            // var json = JSON.stringify(data);
+            // console.log("create defect info json 확인", json);
 
+            if($('#chooseFile').val().length == 0){
             $.ajax({
                 url: `${url}/defect/create`,
                 dataType: 'json',
                 type: 'POST',
-                data: json,
+                data: JSON.stringify(data),
                 contentType: "application/json; charset=UTF-8",
                 processData: false,
                 cache: false,
@@ -379,37 +425,72 @@ $(() => {
                 }
             });
             console.log("execution/defect 실행");
+        };
 
             // 첨부파일 ajax
-            if( $('#chooseFile').val() != null){
+            if( $('#chooseFile').val().length > 0){
                 const photoFile = document.getElementById("chooseFile");
 
                 const formData = new FormData();
                 formData.append("pic", photoFile.files[0]);
-                console.log(photoFile.files[0]);
-                console.log(formData);
+                // console.log(photoFile.files[0]);
+                // console.log(formData);
         
-                $.ajax({
-                url: `${url}/defect/attachFile/create`,
-                type: "POST",
-                processData: false,
-                contentType: false,
-                data: formData,
-                dataType:'json',
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (rtn) {
-                    alert("upload success");
-                },
-                error: function (e) {
-                    console.log("err:", e);
-                    alert("please check your image");
-                    // getData();
-                }
-                });
-            }
+                // $.ajax({
+                // url: `${url}/defect/attachFile/create/${clickeddata}`,
+                // type: "POST",
+                // processData: false,
+                // contentType: false,
+                // data: formData,
+                // dataType:'json',
+                // crossDomain: true,
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                // success: function (rtn) {
+                //     alert("upload success");
+                // },
+                // error: function (e) {
+                //     console.log("err:", e);
+                //     alert("please check your image");
+                //     // getData();
+                // }
+                // });
+
+
+
+                formData.append("key", new Blob([JSON.stringify(data)], {type: "application/json"}));
+            formData.append('data', [JSON.stringify(data)],{type:"application/json"});
+
+
+                console.log("formData 확인하기 : ", formData);
+    
+    
+    
+                    $.ajax({
+                        url: `${url}/execution/defect/attach-file`,
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        cache : false,
+                        data: formData,
+                        dataType:'json',
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        success: function (rtn) {
+                            alert("upload success");
+
+                        },
+                        error: function (e) {
+                            console.log("err:", e);
+                            alert("please check your image");
+                        }
+                        });
+            };
+            createDefectInfoPopup.hide();
+
             }
         }
         },
@@ -589,6 +670,8 @@ $(() => {
         },
         }],
     }).dxPopup('instance');
+
+
 
 });
 

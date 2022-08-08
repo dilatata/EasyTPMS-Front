@@ -1,7 +1,7 @@
 $(() => {
 
-    const url = 'http://192.168.219.140:8080';
-    // const url = 'http://192.168.0.43:8080';  
+    // const url = 'http://192.168.219.140:8080';
+    const url = 'http://192.168.0.43:8080';  
 
     let clickGroupData = null;
     let clickDetailData = null;
@@ -159,6 +159,9 @@ $(() => {
           <label> Code Detail Name: </label> <input type="text" id="popupCommonCodeDetailName" value="${clickDetailData.codeDetailName}"> <br>
           <label> Code Detail Desc: </label> <input type="text" id="popupCommonCodeDesc" value="${clickDetailData.codeDetailDesc}" readonly/> <br>
           <label> useYn: </label> <select id="detailUseYn" class="useYn" value="" />
+          <option value="" selected disabled>== 필수 선택==</option>
+          <option value="y">y</option>
+          <option value="n">n</option>
       </select> <br>
           </form>
 
@@ -174,7 +177,7 @@ $(() => {
                   select.appendChild(option);
               }
           };
-          createSelectBoxAndOptions('detailUseYn', ${JSON.stringify(commonCodeUseYnList)});
+        //   createSelectBoxAndOptions('detailUseYn', ${JSON.stringify(commonCodeUseYnList)});
 
           function getCommonDetailData() {
             $("#codeDetailInfo").dxDataGrid({
@@ -218,8 +221,11 @@ $(() => {
           <label> Code Detail id: </label> <input type="text" id="popupCommonCodeDetailId" value="" readonly/> <br>
           <label> Code Detail Name: </label> <input type="text" id="popupCommonCodeDetailName" value=""> <br>
           <label> Code Detail Desc: </label> <input type="text" id="popupCommonCodeDetailDesc" value=""> <br>
-          <label> useYn: </label> <select name="useYn" id="useYn" class="useYn" value="" />
-      </select> <br>
+          <label> useYn: </label> <select name="useYn" id="useYn" class="useYn" value="" >
+          <option value="" selected disabled>== 필수 선택==</option>
+          <option value="y">y</option>
+          <option value="n">n</option>
+          </select> <br>
           </form>
           `),
 
